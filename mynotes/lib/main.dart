@@ -6,6 +6,7 @@ import 'package:mynotes/view/RegisterView.dart';
 import 'package:mynotes/view/VerifyEmailView.dart';
 import 'dart:developer' as devtools show log;
 
+import 'constants/routes.dart';
 import 'firebase_options.dart';
 
 void main() {
@@ -19,9 +20,10 @@ void main() {
     ),
     home: const HomePage(),
     routes: {
-      '/login/': (context) => const LoginView(),
-      '/register/': (context) => const RegisterView(),
-      '/notes/': (context) => const NotesView()
+      loginRoute: (context) => const LoginView(),
+      registerRoute: (context) => const RegisterView(),
+      notesRoute: (context) => const NotesView(),
+      verityEmailRoute: (context) => const VerifyEmailView(),
     },
   ));
 }
@@ -45,12 +47,11 @@ class _HomePageState extends State<HomePage> {
             final user = FirebaseAuth.instance.currentUser;
 
             if (user != null) {
-              // if (user.emailVerified) {
-              //   return const NotesView();
-              // } else {
-              //   return const VerifyEmailView();
-              // }
-              return const NotesView();
+              if (user.emailVerified) {
+                return const NotesView();
+              } else {
+                return const VerifyEmailView();
+              }
             } else {
               return const LoginView();
             }
@@ -89,7 +90,7 @@ class _NotesViewState extends State<NotesView> {
                   if (showLogout) {
                     await FirebaseAuth.instance.signOut();
                     Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/login/', (_) => false);
+                        .pushNamedAndRemoveUntil(loginRoute, (_) => false);
                   }
 
                   break;
