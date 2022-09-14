@@ -22,7 +22,7 @@ List<Product> products = [
     price: 234,
     size: 12,
     description: dummyText,
-    image: "images/bag_1.png",
+    image: "assets/images/bag_1.png",
     color: const Color(0xFF3D82AE)
   ),
   Product(
