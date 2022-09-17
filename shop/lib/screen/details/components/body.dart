@@ -45,6 +45,7 @@ class Body extends StatelessWidget {
                         children: [
                           const CartCounter(),
                           Container(
+                            margin: const EdgeInsets.only(right: 32),
                             padding: const EdgeInsets.all(8.0),
                             height: 32,
                             width: 32,
@@ -61,10 +62,41 @@ class Body extends StatelessWidget {
                         child: Row(
                           children: [
                             Container(
+                              margin: const EdgeInsets.only(right: kDefaultPadding),
                               width: 50,
                               height: 58,
                               decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
                                 border: Border.all(color: product.color),
+                              ),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.add_shopping_cart,
+                                  color: product.color
+                                ),
+                                onPressed: () {
+
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 50,
+                                child: FlatButton(
+                                  onPressed: () {},
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18)
+                                  ),
+                                  color: product.color,
+                                  child: Text(
+                                    "Buy Now".toUpperCase(),
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white
+                                    )
+                                  ),
+                                ),
                               ),
                             )
                           ],
