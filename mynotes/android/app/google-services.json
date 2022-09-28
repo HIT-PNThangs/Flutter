@@ -29,6 +29,13 @@
             {
               "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "303675115793-7b2ts5n80v76pclo5tefa4t4rp32gvas.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.pixolity.mynotes"
+              }
             }
           ]
         }
