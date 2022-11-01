@@ -6,7 +6,6 @@ import 'package:mynotes/view/RegisterView.dart';
 import 'package:mynotes/view/VerifyEmailView.dart';
 
 import 'constants/routes.dart';
-import 'firebase_options.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -82,12 +82,17 @@ class Body extends StatelessWidget {
                             Expanded(
                               child: SizedBox(
                                 height: 50,
-                                child: FlatButton(
-                                  onPressed: () {},
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18)
+                                child: TextButton(
+                                  // onPressed: () {},
+                                  // shape: RoundedRectangleBorder(
+                                  //   borderRadius: BorderRadius.circular(18)
+                                  // ),
+                                  // color: product.color,
+                                  style: TextButton.styleFrom(
+                                    primary: product.color,
+
                                   ),
-                                  color: product.color,
+                                  onPressed: () {  },
                                   child: Text(
                                     "Buy Now".toUpperCase(),
                                     style: const TextStyle(

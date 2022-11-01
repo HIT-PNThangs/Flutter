@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  applovin_max: ^1.0.0
 
   cupertino_icons: ^1.0.2
 
