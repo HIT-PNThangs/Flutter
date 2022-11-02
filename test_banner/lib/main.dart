@@ -70,10 +70,6 @@ class _MyAppState extends State<MyApp> {
         : 'Show Programmatic Banner';
   }
 
-  String getWidgetBannerButtonTitle() {
-    return _isWidgetBannerShowing ? 'Hide Widget Banner' : 'Show Widget Banner';
-  }
-
   void logStatus(String status) {
     /// ignore: avoid_print
     print(status);
@@ -107,47 +103,34 @@ class _MyAppState extends State<MyApp> {
                     : null,
                 child: const Text("Mediation Debugger"),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: (_isInitialized && !_isWidgetBannerShowing)
-                        ? () async {
-                            if (_isProgrammaticBannerShowing) {
-                              AppLovinMAX.hideBanner(_bannerAdUnitId);
-                            } else {
-                              if (!_isProgrammaticBannerCreated) {
-                                //
-                                // Programmatic banner creation - banners are automatically sized to 320x50 on phones and 728x90 on tablets
-                                //
-                                AppLovinMAX.createBanner(_bannerAdUnitId, AdViewPosition.bottomCenter);
+              ElevatedButton(
+                onPressed: (_isInitialized && !_isWidgetBannerShowing)
+                    ? () async {
+                        if (_isProgrammaticBannerShowing) {
+                          AppLovinMAX.hideBanner(_bannerAdUnitId);
+                        } else {
+                          if (!_isProgrammaticBannerCreated) {
+                            //
+                            // Programmatic banner creation - banners are automatically sized to 320x50 on phones and 728x90 on tablets
+                            //
+                            AppLovinMAX.createBanner(
+                                _bannerAdUnitId, AdViewPosition.bottomCenter);
 
-                                // Set banner background color to black - PLEASE USE HEX STRINGS ONLY
-                                AppLovinMAX.setBannerBackgroundColor(_bannerAdUnitId, '#000000');
+                            // Set banner background color to black - PLEASE USE HEX STRINGS ONLY
+                            AppLovinMAX.setBannerBackgroundColor(_bannerAdUnitId, '#000000');
 
-                                _isProgrammaticBannerCreated = true;
-                              }
-
-                              AppLovinMAX.showBanner(_bannerAdUnitId);
-                            }
-
-                            setState(() {
-                              _isProgrammaticBannerShowing = !_isProgrammaticBannerShowing;
-                            });
-                          } : null,
-                    child: Text(getProgrammaticBannerButtonTitle()),
-                  ),
-                  ElevatedButton(
-                    onPressed: (_isInitialized && !_isProgrammaticBannerShowing)
-                        ? () async {
-                            setState(() {
-                              _isWidgetBannerShowing = !_isWidgetBannerShowing;
-                            });
+                            _isProgrammaticBannerCreated = true;
                           }
-                        : null,
-                    child: Text(getWidgetBannerButtonTitle()),
-                  )
-                ],
+
+                          AppLovinMAX.showBanner(_bannerAdUnitId);
+                        }
+
+                        setState(() {
+                          _isProgrammaticBannerShowing = !_isProgrammaticBannerShowing;
+                        });
+                      }
+                    : null,
+                child: Text(getProgrammaticBannerButtonTitle()),
               ),
               if (_isWidgetBannerShowing)
                 MaxAdView(
@@ -155,12 +138,10 @@ class _MyAppState extends State<MyApp> {
                     adFormat: AdFormat.banner,
                     listener: AdViewAdListener(onAdLoadedCallback: (ad) {
                       logStatus(
-                          'Banner widget ad loaded from ${ad.networkName}'
-                      );
+                          'Banner widget ad loaded from ${ad.networkName}');
                     }, onAdLoadFailedCallback: (adUnitId, error) {
                       logStatus(
-                          'Banner widget ad failed to load with error code ${error.code} and message: ${error.message}'
-                      );
+                          'Banner widget ad failed to load with error code ${error.code} and message: ${error.message}');
                     }, onAdClickedCallback: (ad) {
                       logStatus('Banner widget ad clicked');
                     }, onAdExpandedCallback: (ad) {
