@@ -117,7 +117,8 @@ class _MyAppState extends State<MyApp> {
                                 _bannerAdUnitId, AdViewPosition.bottomCenter);
 
                             // Set banner background color to black - PLEASE USE HEX STRINGS ONLY
-                            AppLovinMAX.setBannerBackgroundColor(_bannerAdUnitId, '#000000');
+                            AppLovinMAX.setBannerBackgroundColor(
+                                _bannerAdUnitId, '#000000');
 
                             _isProgrammaticBannerCreated = true;
                           }
@@ -126,7 +127,8 @@ class _MyAppState extends State<MyApp> {
                         }
 
                         setState(() {
-                          _isProgrammaticBannerShowing = !_isProgrammaticBannerShowing;
+                          _isProgrammaticBannerShowing =
+                              !_isProgrammaticBannerShowing;
                         });
                       }
                     : null,
