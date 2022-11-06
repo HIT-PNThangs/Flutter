@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Native Ad"),
+          title: const Text("Native Ad Test"),
         ),
         body: Column(
           children: [
