@@ -40,7 +40,9 @@ class HomeScreen extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.push(context, ProfileScreen.routeName);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return const ProfileScreen();
+                  }));
                 },
                 color: Colors.white,
                 icon: const Icon(Icons.person),
