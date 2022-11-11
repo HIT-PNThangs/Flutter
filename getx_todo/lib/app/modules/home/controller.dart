@@ -17,6 +17,7 @@ class HomeController extends GetxController {
   final task = Rx<Task?>(null);
   final doingTodos = <dynamic>[].obs;
   final doneTodos = <dynamic>[].obs;
+  final tabIndex = 0.obs;
 
   @override
   void onInit() {
@@ -154,5 +155,9 @@ class HomeController extends GetxController {
     }
 
     return res;
+  }
+
+  void changeTabIndex(int value) {
+    tabIndex.value = value;
   }
 }
