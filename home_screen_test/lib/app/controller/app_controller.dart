@@ -4,12 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
+enum WallpaperType { HD, Live }
+
 class AppController extends GetxController {
   List listDataHD = [];
   List listDataLive = [];
+
+  RxBool isPremium = false.obs;
+
   // InterstitialAd? interstitialAd;
   // RewardedAd? rewardedAd;
-  // RxBool isPremium = false.obs;
   RxList<FileSystemEntity> listFileDownloaded = RxList();
 
   @override
@@ -100,5 +104,3 @@ class AppController extends GetxController {
     listFileDownloaded.value = directoryDownload.listSync();
   }
 }
-
-enum WallpaperType { HD, Live }

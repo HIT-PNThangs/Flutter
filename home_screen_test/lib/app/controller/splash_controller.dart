@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +21,7 @@ class SplashController extends GetxController {
   void onReady() async {
     super.onReady();
 
-    // await _checkPurchased();
+    await _checkPurchased();
 
     BaseResponse responseHD = await ApiClient.instance
         .request(endPoint: ApiConstant.ep_cates, method: ApiClient.POST, data: json.encode({"type": 0}));
@@ -30,19 +31,20 @@ class SplashController extends GetxController {
 
     if (responseHD.result == true && responseLive.result == true) {
       AppController appController = Get.find<AppController>();
+
       appController.listDataHD = responseHD.data;
       appController.listDataLive = responseLive.data;
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       int showIntro = prefs.getInt('showIntro') ?? 1;
-      await Future.delayed(Duration(seconds: 1));
+
+      await Future.delayed(const Duration(seconds: 1));
+
       if (showIntro == 1) {
         Get.offAndToNamed(AppRoute.intro_screen);
       } else {
         Get.offAndToNamed(AppRoute.home_screen);
       }
-
-      // Get.offAndToNamed(AppRoute.home_screen);
     } else {
       AppUtil.showToast((responseHD.message ?? '').isNotEmpty
           ? (responseHD.message ?? '')
@@ -51,23 +53,25 @@ class SplashController extends GetxController {
           : 'Unknown error');
     }
   }
-  //
-  // _checkPurchased() async {
-  //   await FlutterInappPurchase.instance.initialize();
-  //   List<PurchasedItem> pis = await FlutterInappPurchase.instance.getAvailablePurchases() ?? [];
-  //   if (pis.length > 0) {
-  //     bool check = false;
-  //     for (int i = 0; i < pis.length; i++) {
-  //       if (pis[i].purchaseStateAndroid == PurchaseState.purchased) {
-  //         check = true;
-  //         break;
-  //       }
-  //     }
-  //     _appController.isPremium.value = check;
-  //   } else {
-  //     _appController.isPremium.value = false;
-  //   }
-  //
-  //   FlutterInappPurchase.instance.finalize();
-  // }
+
+  _checkPurchased() async {
+    await FlutterInappPurchase.instance.initialize();
+
+    List<PurchasedItem> pis = await FlutterInappPurchase.instance.getAvailablePurchases() ?? [];
+
+    if (pis.isNotEmpty) {
+      bool check = false;
+      for (int i = 0; i < pis.length; i++) {
+        if (pis[i].purchaseStateAndroid == PurchaseState.purchased) {
+          check = true;
+          break;
+        }
+      }
+      _appController.isPremium.value = check;
+    } else {
+      _appController.isPremium.value = false;
+    }
+
+    FlutterInappPurchase.instance.finalize();
+  }
 }

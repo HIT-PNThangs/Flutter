@@ -11,7 +11,7 @@ class TouchableWidget extends StatelessWidget {
   final double? width;
   final double? height;
 
-  TouchableWidget({
+  const TouchableWidget({super.key,
     required this.onPressed,
     this.onLongPressed,
     required this.child,
@@ -30,12 +30,12 @@ class TouchableWidget extends StatelessWidget {
       height: height,
       margin: margin,
       decoration: decoration ??
-          BoxDecoration(
+          const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(4)),
           ),
       child: Stack(children: <Widget>[
         Container(
-          padding: padding ?? EdgeInsets.all(10),
+          padding: padding ?? const EdgeInsets.all(10),
           child: Center(
             child: child,
           ),
@@ -44,10 +44,12 @@ class TouchableWidget extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              highlightColor: Color.fromRGBO(204, 223, 242, 0.0),
-              splashColor: Color.fromRGBO(204, 223, 242, 0.1),
+              highlightColor: const Color.fromRGBO(204, 223, 242, 0.0),
+              splashColor: const Color.fromRGBO(204, 223, 242, 0.1),
               customBorder: RoundedRectangleBorder(
-                  borderRadius: borderRadiusEffect ?? decoration?.borderRadius ?? BorderRadius.all(Radius.circular(6))),
+                  borderRadius: borderRadiusEffect ??
+                      decoration?.borderRadius ??
+                      const BorderRadius.all(Radius.circular(6))),
               onTap: onPressed,
               onLongPress: onLongPressed,
             ),

@@ -12,7 +12,12 @@ class CommonScreen extends StatelessWidget {
   final bool? isFixedSizeHeader;
 
   const CommonScreen(
-      {Key? key, this.isBlankScreen, this.child, this.mainBackgroundColor, this.isFixedSizeHeader, this.header})
+      {Key? key,
+      this.isBlankScreen,
+      this.child,
+      this.mainBackgroundColor,
+      this.isFixedSizeHeader,
+      this.header})
       : super(key: key);
 
   @override
@@ -37,8 +42,12 @@ class CommonScreen extends StatelessWidget {
                             Container(child: header ?? const SizedBox.shrink()),
                             Container(
                               margin: EdgeInsets.only(
-                                  top: ((MediaQuery.of(context).size.width / 15) * 3.2) +
-                                      (MediaQuery.of(context).padding.top > 24 ? 15 : 0)),
+                                  top: ((MediaQuery.of(context).size.width /
+                                              15) *
+                                          3.2) +
+                                      (MediaQuery.of(context).padding.top > 24
+                                          ? 15
+                                          : 0)),
                               child: child,
                             ),
                           ],

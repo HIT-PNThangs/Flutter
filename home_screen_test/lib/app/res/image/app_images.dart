@@ -20,6 +20,9 @@ class AppImages {
   static const String add = "${_internalImagePath}add.svg";
 
 
+  static const String ic_placeholder = "${_internalImagePath}ic_placeholder.png";
+
+
   static const String camera = "${_internalImagePath}camera.svg";
   static const String contact_us = "${_internalImagePath}contact_us.svg";
   static const String how_to_use = "${_internalImagePath}how_to_use.svg";

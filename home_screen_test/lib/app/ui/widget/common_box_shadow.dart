@@ -9,13 +9,17 @@ class CommonBoxShadow extends BoxShadow {
     double blurRadius = 0.0,
     double spreadRadius = 0.0,
     this.blurStyle = BlurStyle.normal,
-  }) : super(color: color, offset: offset, blurRadius: blurRadius, spreadRadius: spreadRadius);
+  }) : super(
+            color: color,
+            offset: offset,
+            blurRadius: blurRadius,
+            spreadRadius: spreadRadius);
 
   @override
   Paint toPaint() {
     final Paint result = Paint()
       ..color = color
-      ..maskFilter = MaskFilter.blur(this.blurStyle, blurSigma);
+      ..maskFilter = MaskFilter.blur(blurStyle, blurSigma);
     assert(() {
       if (debugDisableShadows) result.maskFilter = null;
       return true;
