@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -9,6 +10,24 @@ List<dynamic> list = [
   "lib/images/image4.jpg",
   "lib/images/image5.jpg",
   "lib/images/image6.jpg",
+  "lib/images/image6.jpg",
+  "lib/images/image5.jpg",
+  "lib/images/image4.jpg",
+  "lib/images/image3.jpg",
+  "lib/images/image2.jpg",
+  "lib/images/image1.jpg",
+  "lib/images/image1.jpg",
+  "lib/images/image2.jpg",
+  "lib/images/image3.jpg",
+  "lib/images/image4.jpg",
+  "lib/images/image5.jpg",
+  "lib/images/image6.jpg",
+  "lib/images/image6.jpg",
+  "lib/images/image5.jpg",
+  "lib/images/image4.jpg",
+  "lib/images/image3.jpg",
+  "lib/images/image2.jpg",
+  "lib/images/image1.jpg",
 ];
 
 class MyApp extends StatelessWidget {
@@ -36,54 +55,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final LoopPageController thumbnailController =
-  //     LoopPageController(viewportFraction: 0.75);
-  //
-  // final LoopPageController imageController = LoopPageController();
-
-  int currentIndex = 0;
-
-  final PageController thumbnailController =
-      PageController(viewportFraction: 0.75);
-  final PageController imageController = PageController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: const Alignment(1, 1),
-        children: [
-          PageView.builder(
-              controller: imageController,
-              itemCount: list.length,
-              onPageChanged: (value) => {
-                    setState(() {
-                      currentIndex = value;
-                    })
-                  },
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Image.asset(list[index],
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover);
-              }),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ListView.builder(
-                    padding: const EdgeInsets.all(8.0),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      return Image.asset(list[index], fit: BoxFit.cover);
-                    }),
-              ],
-            ),
-          ),
-        ],
+      body: Center(
+        child: SizedBox(
+            height: 64,
+            child: RotatedBox(
+              quarterTurns: -1,
+              child: CupertinoPicker(
+                looping: true,
+                scrollController: FixedExtentScrollController(),
+                backgroundColor: Colors.transparent,
+                onSelectedItemChanged: (int value) {},
+                itemExtent: 64,
+                children: list
+                    .map((e) => RotatedBox(
+                        quarterTurns: 1,
+                        child: Image.asset(
+                          e,
+                          width: 64,
+                          height: 64,
+                        )))
+                    .toList(),
+              ),
+            )),
       ),
     );
   }

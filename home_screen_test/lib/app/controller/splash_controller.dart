@@ -58,7 +58,7 @@ class SplashController extends GetxController {
     BaseResponse response = await ApiClient.instance.request(
         endPoint: ApiConstant.ep_cates,
         method: ApiClient.POST,
-        data: json.encode({"type": 1}));
+        data: json.encode({"type": ""}));
 
     if (response.result == true) {
       AppController appController = Get.find<AppController>();

@@ -11,9 +11,8 @@ class HomeController extends GetxController {
   Map data = {};
   AppController appController = Get.find<AppController>();
 
-  final PageController imageController = PageController(initialPage: 0);
-
   RxInt currentIndex = 0.obs;
+
 
   RxBool showDownloading = false.obs;
   RxString type = ''.obs;
@@ -36,7 +35,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
 
-    data = appController.list[4];
+    data = appController.list[0];
   }
 
   void changeIndex(int value) {

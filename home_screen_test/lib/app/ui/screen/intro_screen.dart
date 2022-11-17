@@ -70,7 +70,9 @@ class IntroScreen extends GetView<IntroController> {
                           height: 8.0.sp,
                           margin: EdgeInsets.symmetric(horizontal: 4.0.sp),
                           decoration: BoxDecoration(
-                            color: controller.currentIndex.value == e ? AppColors.colorButtonBlue : Colors.white,
+                            color: controller.currentIndex.value == e
+                                ? AppColors.colorButtonBlue
+                                : Colors.white,
                             borderRadius: BorderRadius.circular(4.0.sp),
                           ),
                         );
@@ -83,7 +85,8 @@ class IntroScreen extends GetView<IntroController> {
                       width: 160.0.sp,
                       height: 44.0.sp,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(22.0.sp)),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(22.0.sp)),
                         image: const DecorationImage(
                           image: AssetImage(AppImages.bg_button),
                           fit: BoxFit.fill,
@@ -98,7 +101,9 @@ class IntroScreen extends GetView<IntroController> {
                         ],
                       ),
                       child: Text(
-                        controller.currentIndex.value == 2 ? 'Continue' : 'Next',
+                        controller.currentIndex.value == 2
+                            ? 'Continue'
+                            : 'Next',
                         style: TextStyle(
                           fontSize: 18.0.sp,
                           fontFamily: AppFonts.robotoMedium,
