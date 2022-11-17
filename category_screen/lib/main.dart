@@ -1,22 +1,22 @@
+import 'package:category_screen/app/app_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'app/binding/app_binding.dart';
+
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Scaffold(),
+      initialBinding: AppBinding(),
+      initialRoute: AppRoute.splash_screen,
+      getPages: AppPages.pages,
+      theme: ThemeData(brightness: Brightness.dark)
     );
   }
 }

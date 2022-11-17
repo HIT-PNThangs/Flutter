@@ -4,11 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
-enum WallpaperType { HD, Live }
+// enum WallpaperType { HD, Live }
 
 class AppController extends GetxController {
-  List listDataHD = [];
-  List listDataLive = [];
+  // List listDataHD = [];
+  // List listDataLive = [];
+
+  List list = [];
 
   RxBool isPremium = false.obs;
 
