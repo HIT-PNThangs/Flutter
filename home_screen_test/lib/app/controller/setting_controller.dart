@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../util/app_util.dart';
-import '../route/app_pages.dart';
 import 'app_controller.dart';
 
 class SettingController extends GetxController {

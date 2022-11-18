@@ -36,7 +36,7 @@ class IntroScreen extends GetView<IntroController> {
                   e,
                   fit: BoxFit.cover,
                   width: Get.width,
-                  height: Get.height,
+                  height: Get.height - MediaQuery.of(context).viewPadding.top,
                 );
               }).toList(),
               carouselController: controller.carouselController,

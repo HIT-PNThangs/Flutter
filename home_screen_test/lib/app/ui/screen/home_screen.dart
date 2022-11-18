@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:home_screen_test/app/controller/app_controller.dart';
+import 'package:home_screen_test/app/route/app_pages.dart';
 import 'package:home_screen_test/util/extensions.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 
 import '../../controller/home_controller.dart';
 import '../../res/image/app_images.dart';
-import '../../route/app_pages.dart';
 import '../widget/common_image_network.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
+  AppController appController = Get.find<AppController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +25,22 @@ class HomeScreen extends GetView<HomeController> {
       body: Stack(
         alignment: const Alignment(1, 1),
         children: [
+          // load image
           LoopPageView.builder(
             controller: LoopPageController(initialPage: 0),
             itemCount: list.length,
-            onPageChanged: (value) => {controller.changeIndex(value)},
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Obx(() => CommonImageNetwork(
-                    url: list[controller.currentIndex.value]['image'],
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
+                    url: list[controller.currentIndexImage.value]['image'],
+                    width: Get.width,
+                    height: Get.height - Get.statusBarHeight,
                     fit: BoxFit.cover,
                   ));
             },
           ),
+          // Category title
           Padding(
             padding: EdgeInsets.only(top: 15.0.wp),
             child: Column(
@@ -50,6 +54,7 @@ class HomeScreen extends GetView<HomeController> {
               ],
             ),
           ),
+          // In app purchase, Review, Share app button group
           Container(
             alignment: const Alignment(0.9, -1),
             child: Padding(
@@ -66,7 +71,7 @@ class HomeScreen extends GetView<HomeController> {
                     InkWell(
                       onTap: () {
                         Fluttertoast.showToast(
-                            msg: "In App Purchare",
+                            msg: "In App Purchase",
                             toastLength: Toast.LENGTH_LONG,
                             gravity: ToastGravity.CENTER,
                             timeInSecForIosWeb: 1,
@@ -87,12 +92,26 @@ class HomeScreen extends GetView<HomeController> {
                             fontSize: 16.0);
                       },
                       child: SvgPicture.asset(AppImages.eyes),
+                    ),
+                    SizedBox(height: 3.0.wp),
+                    InkWell(
+                      onTap: () {
+                        Fluttertoast.showToast(
+                            msg: "Eye",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      },
+                      child: SvgPicture.asset(AppImages.eyes),
                     )
                   ],
                 ),
               ),
             ),
           ),
+          // Set, Category, Add group button
           Padding(
             padding: EdgeInsets.only(bottom: 33.0.wp),
             child: Container(
@@ -106,15 +125,7 @@ class HomeScreen extends GetView<HomeController> {
                         borderRadius: BorderRadius.circular(24.0.sp)),
                     child: IconButton(
                       onPressed: () {
-                        Fluttertoast.showToast(
-                            msg: "Category",
-                            toastLength: Toast.LENGTH_LONG,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-
-                        Get.offAndToNamed(AppRoute.category_screen);
+                        Get.toNamed(AppRoute.category_screen);
                       },
                       icon: SvgPicture.asset(AppImages.category_icon),
                     ),
@@ -174,6 +185,7 @@ class HomeScreen extends GetView<HomeController> {
               ),
             ),
           ),
+          // Pick image
           Padding(
             padding: EdgeInsets.only(bottom: 6.0.wp),
             child: SizedBox(
@@ -181,21 +193,20 @@ class HomeScreen extends GetView<HomeController> {
               child: RotatedBox(
                 quarterTurns: -1,
                 child: CupertinoPicker(
-                  onSelectedItemChanged: (int value) {
-                    controller.changeIndex(value);
-                  },
-                  itemExtent: 64,
-                  looping: true,
-                  children: list
-                      .map((e) => RotatedBox(
-                          quarterTurns: 1,
-                          child: CommonImageNetwork(
-                            url: e['image'],
-                            width: 32,
-                            height: 64,
-                          )))
-                      .toList(),
-                ),
+                    onSelectedItemChanged: (int value) {
+                      controller.changeIndexImage(value);
+                    },
+                    itemExtent: 64,
+                    looping: true,
+                    children: list
+                        .map((e) => RotatedBox(
+                            quarterTurns: 1,
+                            child: CommonImageNetwork(
+                              url: e['image'],
+                              width: 32,
+                              height: 64,
+                            )))
+                        .toList()),
               ),
             ),
           )

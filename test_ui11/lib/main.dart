@@ -55,31 +55,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: SizedBox(
-            height: 64,
-            child: RotatedBox(
-              quarterTurns: -1,
-              child: CupertinoPicker(
-                looping: true,
-                scrollController: FixedExtentScrollController(),
-                backgroundColor: Colors.transparent,
-                onSelectedItemChanged: (int value) {},
-                itemExtent: 64,
-                children: list
-                    .map((e) => RotatedBox(
-                        quarterTurns: 1,
-                        child: Image.asset(
-                          e,
-                          width: 64,
-                          height: 64,
-                        )))
-                    .toList(),
-              ),
-            )),
+          height: 128,
+          child: ListView.builder(
+            itemCount: list.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              return Image.asset(list[index], width: 64, height: 128);
+            },
+          ),
+        ),
       ),
     );
   }

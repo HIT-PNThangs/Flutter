@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
-import 'package:home_screen_test/app/binding/category_binding.dart';
-import 'package:home_screen_test/app/binding/home_binding.dart';
-import 'package:home_screen_test/app/binding/intro_binding.dart';
-import 'package:home_screen_test/app/binding/setting_binding.dart';
-import 'package:home_screen_test/app/ui/screen/category_screen.dart';
-import 'package:home_screen_test/app/ui/screen/intro_screen.dart';
-import 'package:home_screen_test/app/ui/screen/setting_screen.dart';
 
+import '../binding/category_binding.dart';
+import '../binding/home_binding.dart';
+import '../binding/intro_binding.dart';
+import '../binding/setting_binding.dart';
 import '../binding/splash_binding.dart';
+import '../ui/screen/category_screen.dart';
 import '../ui/screen/home_screen.dart';
+import '../ui/screen/intro_screen.dart';
+import '../ui/screen/setting_screen.dart';
 import '../ui/screen/splash_screen.dart';
 
 class AppPages {

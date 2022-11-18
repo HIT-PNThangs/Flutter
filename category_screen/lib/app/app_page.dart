@@ -6,8 +6,14 @@ import 'package:get/get.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: AppRoute.splash_screen, page: () =>  const SplashScreen(), binding: SplashBinding()),
-    GetPage(name: AppRoute.category_screen, page: () => CategoryScreen(), binding: CategoryBinding()),
+    GetPage(
+        name: AppRoute.splash_screen,
+        page: () => const SplashScreen(),
+        binding: SplashBinding()),
+    GetPage(
+        name: AppRoute.category_screen,
+        page: () => CategoryScreen(),
+        binding: CategoryBinding()),
   ];
 }
 

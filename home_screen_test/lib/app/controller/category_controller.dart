@@ -1,14 +1,17 @@
 import 'package:get/get.dart';
-import 'package:home_screen_test/app/controller/app_controller.dart';
+
+import 'app_controller.dart';
+
+
 
 class CategoryController extends GetxController {
-  List listCommon = [];
-
   AppController appController = AppController();
+
+  List listCommon = [];
+  RxInt currentIndexCategory = 0.obs;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
 
     for(int i = 0; i < appController.list.length; i++) {
@@ -16,5 +19,7 @@ class CategoryController extends GetxController {
     }
   }
 
-
+  void changeIndexCategory(int value) {
+    currentIndexCategory.value = value;
+  }
 }

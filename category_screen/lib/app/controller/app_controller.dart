@@ -11,8 +11,7 @@ import '../data/provider/api_constant.dart';
 enum WallpaperType { HD, Live }
 
 class AppController extends GetxController {
-  List listDataHD = [];
-  List listDataLive = [];
+  List listData = [];
 
   RxBool isPremium = false.obs;
 

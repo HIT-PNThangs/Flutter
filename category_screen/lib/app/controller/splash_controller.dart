@@ -10,7 +10,6 @@ import '../data/provider/api_constant.dart';
 import '../util/app_util.dart';
 import 'app_controller.dart';
 
-
 class SplashController extends GetxController {
   BuildContext? buildContext;
 
@@ -18,24 +17,20 @@ class SplashController extends GetxController {
   void onReady() async {
     super.onReady();
 
-    BaseResponse responseHD = await ApiClient.instance
-        .request(endPoint: ApiConstant.ep_cates, method: ApiClient.POST, data: json.encode({"type": 0}));
+    BaseResponse response = await ApiClient.instance.request(
+        endPoint: ApiConstant.ep_cates,
+        method: ApiClient.POST,
+        data: json.encode({"type": ""}));
 
-    BaseResponse responseLive = await ApiClient.instance
-        .request(endPoint: ApiConstant.ep_cates, method: ApiClient.POST, data: json.encode({"type": 1}));
-
-    if (responseHD.result == true && responseLive.result == true) {
+    if (response.result == true) {
       AppController appController = Get.find<AppController>();
 
-      appController.listDataHD = responseHD.data;
-      appController.listDataLive = responseLive.data;
+      appController.listData = response.data;
 
       Get.offAndToNamed(AppRoute.category_screen);
     } else {
-      AppUtil.showToast((responseHD.message ?? '').isNotEmpty
-          ? (responseHD.message ?? '')
-          : (responseLive.message ?? '').isNotEmpty
-          ? (responseLive.message ?? '')
+      AppUtil.showToast((response.message ?? '').isNotEmpty
+          ? (response.message ?? '')
           : 'Unknown error');
     }
   }
