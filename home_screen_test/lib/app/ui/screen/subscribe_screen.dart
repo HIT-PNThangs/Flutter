@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:home_screen_test/app/controller/subscribe_controller.dart';
 import 'package:home_screen_test/util/extensions.dart';
@@ -8,7 +9,6 @@ import '../../res/image/app_images.dart';
 import '../theme/app_colors.dart';
 import '../widget/common_box_shadow.dart';
 import '../widget/common_screen.dart';
-import '../widget/header_button.dart';
 import '../widget/touchable_widget.dart';
 
 class SubscribeScreen extends GetView<SubscribeController> {
@@ -22,34 +22,29 @@ class SubscribeScreen extends GetView<SubscribeController> {
         children: [
           SingleChildScrollView(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top + 32.0.sp,
-              left: 12.0.sp,
-              right: 12.0.sp,
+              top: MediaQuery.of(context).padding.top + 24.0.sp,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 48.0.sp),
-                  child: Image.asset(
-                    AppImages.bg_pre_top,
-                    fit: BoxFit.contain,
-                  ),
+                Image.asset(
+                  AppImages.frame_image,
+                  fit: BoxFit.fitWidth,
                 ),
-                SizedBox(height: 12.0.sp),
+                SizedBox(height: 16.0.sp),
                 Text(
-                  'AIRLIVE PREMIUM',
+                  ' Unlimited hot & trend wallpapers',
                   style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 32.0.sp,
+                    color: AppColors.orange,
+                    fontSize: 16.0.sp,
                     fontFamily: AppFonts.robotoBold,
                   ),
                 ),
-                buildRow('Unlock all wallpaper'),
-                buildRow('Exclusive collections'),
-                buildRow('Customization tools'),
-                buildRow('Daily update'),
-                buildRow('No ads'),
+                SizedBox(height: 8.0.sp),
+                buildRow('Unlock all wallpapers'),
+                buildRow('Update Hot - Trendy wallpapers'),
+                buildRow('Suitable for all devices'),
+                buildRow('No Ads & Cancel Anytime'),
                 SizedBox(height: 16.0.sp),
                 Obx(() => controller.rxListIAPItem.value.isEmpty
                     ? const CircularProgressIndicator(color: AppColors.primary)
@@ -61,9 +56,11 @@ class SubscribeScreen extends GetView<SubscribeController> {
                             case 'wf_weekly':
                               name = 'Weekly ${e.localizedPrice}';
                               break;
+
                             case 'wf_monthly':
                               name = 'Monthly ${e.localizedPrice}';
                               break;
+
                             case 'wf_yearly':
                               name = 'Yearly ${e.localizedPrice}';
                               break;
@@ -142,21 +139,6 @@ class SubscribeScreen extends GetView<SubscribeController> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: TouchableWidget(
-                        onPressed: controller.onPressRestore,
-                        child: Text(
-                          'Restore',
-                          style: TextStyle(
-                            fontSize: 12.0.sp,
-                            fontFamily: AppFonts.robotoRegular,
-                            color: AppColors.white,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 SizedBox(height: 24.0.sp),
@@ -164,16 +146,22 @@ class SubscribeScreen extends GetView<SubscribeController> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 16.0.sp),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 8.0.sp),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                HeaderButton(
-                  icon: AppImages.ic_close,
-                  iconColor: AppColors.white,
-                  onPressed: Get.back,
-                  iconHeight: 30.0.sp,
-                  iconWidth: 30.0.sp,
+                Padding(
+                  padding: EdgeInsets.only(right: 8.0.sp),
+                  child: IconButton(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onPressed: () => Get.back(),
+                    icon: SvgPicture.asset(
+                      AppImages.ic_close,
+                      height: 30.0.sp,
+                      width: 30.0.sp,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -185,10 +173,10 @@ class SubscribeScreen extends GetView<SubscribeController> {
 
   Widget buildRow(String text) {
     return Padding(
-      padding: EdgeInsets.only(top: 2.0.sp),
+      padding: EdgeInsets.only(top: 4.0.sp),
       child: Row(
         children: [
-          SizedBox(width: Get.width / 5),
+          SizedBox(width: Get.width / 7),
           Image.asset(
             AppImages.ic_check_subscriber,
             width: 20.0.sp,

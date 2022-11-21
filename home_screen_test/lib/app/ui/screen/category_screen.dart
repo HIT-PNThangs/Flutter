@@ -74,7 +74,7 @@ class CategoryScreen extends GetView<HomeController> {
                 itemBuilder: (context, index) => Obx(() => GestureDetector(
                       onTap: () {
                         controller.changeIndexCategory(index);
-
+                        controller.changeIndexImage(0);
                         Get.back();
                       },
                       child: index == controller.currentIndexCategory.value

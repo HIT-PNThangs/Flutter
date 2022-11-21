@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
+import 'package:home_screen_test/app/binding/selected_image_binding.dart';
 import 'package:home_screen_test/app/binding/subscribe_binding.dart';
+import 'package:home_screen_test/app/controller/selected_image_controller.dart';
+import 'package:home_screen_test/app/ui/screen/help_screen.dart';
+import 'package:home_screen_test/app/ui/screen/selected_image_screen.dart';
 import 'package:home_screen_test/app/ui/screen/subscribe_screen.dart';
 
 import '../binding/home_binding.dart';
@@ -22,7 +26,9 @@ class AppPages {
         name: AppRoute.subscriber_screen,
         page: () => const SubscribeScreen(),
         binding: SubscribeBinding(),
-        transition: Transition.downToUp)
+        transition: Transition.downToUp),
+    GetPage(name: AppRoute.help_screen, page: () => const HelpScreen(), transition: Transition.downToUp),
+    GetPage(name: AppRoute.selected_image_screen, page: () => SelectedImageScreen(), binding: SelectedImageBinding()),
   ];
 }
 
@@ -33,4 +39,6 @@ class AppRoute {
   static const String setting_screen = '/setting_screen';
   static const String category_screen = '/category_screen';
   static const String subscriber_screen = '/subscriber_screen';
+  static const String help_screen = '/help_screen';
+  static const String selected_image_screen = '/selected_image_screen';
 }

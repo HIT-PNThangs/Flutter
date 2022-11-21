@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../route/app_pages.dart';
 import '../ui/theme/app_colors.dart';
 import '../ui/widget/common_screen.dart';
 
@@ -43,7 +44,7 @@ class AppController extends GetxController {
   //     ),
   //   );
   // }
-
+  //
   // initAdReward() {
   //   RewardedAd.load(
   //     adUnitId: AppConstant.IDRewardAppAd,
@@ -81,16 +82,13 @@ class AppController extends GetxController {
   //   }
   // }
 
-  // goToPreview(String link, String tag, String video, String type) {
-  //   interstitialAd = null;
-  //   initAdInterstitial();
-  //   Get.toNamed(AppRoute.preview_screen, arguments: {
-  //     'type': type,
-  //     'link': link,
-  //     'tag': tag,
-  //     'video': video,
-  //   });
-  // }
+  goToPreview(String link) {
+    // interstitialAd = null;
+    // initAdInterstitial();
+    Get.toNamed(AppRoute.selected_image_screen, arguments: {
+      'link': link,
+    });
+  }
 
   updateDownloadedImages() async {
     Directory? directory = await getApplicationDocumentsDirectory();

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:home_screen_test/app/res/font/app_fonts.dart';
 import 'package:home_screen_test/util/extensions.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 
@@ -10,6 +11,7 @@ import '../../controller/app_controller.dart';
 import '../../controller/home_controller.dart';
 import '../../res/image/app_images.dart';
 import '../../route/app_pages.dart';
+import '../theme/app_colors.dart';
 import '../widget/common_image_network.dart';
 import '../widget/common_screen.dart';
 
@@ -32,24 +34,30 @@ class HomeScreen extends GetView<HomeController> {
               // physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return Obx(() => controller.listImage[controller.currentIndexImage.value]['type'] == 1
-                    ? Obx(() => CommonImageNetwork(
-                          url: controller.listImage[controller.currentIndexImage.value]['image'],
-                          width: Get.width,
-                          height: Get.height,
-                          fit: BoxFit.cover,
-                        ))
-                    : Obx(
-                        () => Container(
-                          color: Colors.white,
-                          child: Center(
-                            child: Text(
-                              "Video ${controller.currentIndexImage.value}",
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ));
+                return Obx(() => CommonImageNetwork(
+                      url: controller.listImage[controller.currentIndexImage.value]['image'],
+                      width: Get.width,
+                      height: Get.height,
+                      fit: BoxFit.cover,
+                    ));
+                // return Obx(() => controller.listImage[controller.currentIndexImage.value]['type'] == 1
+                //     ? Obx(() => CommonImageNetwork(
+                //           url: controller.listImage[controller.currentIndexImage.value]['image'],
+                //           width: Get.width,
+                //           height: Get.height,
+                //           fit: BoxFit.cover,
+                //         ))
+                //     : Obx(
+                //         () => Container(
+                //           color: Colors.white,
+                //           child: Center(
+                //             child: Text(
+                //               "Video ${controller.currentIndexImage.value}",
+                //               style: const TextStyle(color: Colors.black),
+                //             ),
+                //           ),
+                //         ),
+                //       ));
               },
             ),
             // Category title
@@ -82,9 +90,7 @@ class HomeScreen extends GetView<HomeController> {
                       IconButton(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onPressed: () {
-                          Get.to(AppRoute.subscriber_screen);
-                        },
+                        onPressed: () => controller.onPressPremium(),
                         icon: SvgPicture.asset(
                           AppImages.crown,
                         ),
@@ -112,7 +118,7 @@ class HomeScreen extends GetView<HomeController> {
                           controller.onPressShare();
                         },
                         icon: SvgPicture.asset(
-                          AppImages.share_app_home,
+                          AppImages.share_app,
                         ),
                       )
                     ],
@@ -175,13 +181,77 @@ class HomeScreen extends GetView<HomeController> {
                           BoxDecoration(color: Colors.black.withOpacity(0.5), borderRadius: BorderRadius.circular(24.0.sp)),
                       child: IconButton(
                         onPressed: () {
-                          Fluttertoast.showToast(
-                              msg: "Add",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
+                          // showDialog(context: context, builder: (BuildContext context) => addDialog(context));
+                          showGeneralDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                              barrierColor: Colors.black.withOpacity(0.7),
+                              transitionDuration: const Duration(milliseconds: 200),
+                              pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => controller.onPressAlbum(),
+                                      child: Container(
+                                          height: 40.0.sp,
+                                          width: 180.0.sp,
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xff242424), borderRadius: BorderRadius.circular(8.0.sp)),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(width: 8.0.sp),
+                                              SvgPicture.asset(AppImages.show_an_image),
+                                              SizedBox(width: 8.0.sp),
+                                              DefaultTextStyle(
+                                                  style: TextStyle(
+                                                      color: AppColors.orange,
+                                                      fontSize: 16.0.sp,
+                                                      fontFamily: AppFonts.robotoLight),
+                                                  child: const Text('Your album'))
+                                            ],
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      height: 8.0.sp,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () => controller.onPressCameraPick(),
+                                      child: Container(
+                                          height: 40.0.sp,
+                                          width: 180.0.sp,
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xff242424), borderRadius: BorderRadius.circular(8.0.sp)),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(width: 8.0.sp),
+                                              SvgPicture.asset(AppImages.camera),
+                                              SizedBox(width: 8.0.sp),
+                                              DefaultTextStyle(
+                                                  style: TextStyle(
+                                                      color: AppColors.orange,
+                                                      fontSize: 16.0.sp,
+                                                      fontFamily: AppFonts.robotoLight),
+                                                  child: const Text('Camera'))
+                                            ],
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      height: 24.0.sp,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () => Get.back(),
+                                      child: Container(
+                                          height: 40.0.sp,
+                                          width: 150.0.sp,
+                                          decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xff242424)),
+                                          child: SvgPicture.asset(AppImages.ic_close,
+                                              width: 28.0.sp, height: 28.0.sp, fit: BoxFit.scaleDown)),
+                                    ),
+                                  ],
+                                );
+                              });
                         },
                         highlightColor: Colors.transparent,
                         splashColor: Colors.transparent,
