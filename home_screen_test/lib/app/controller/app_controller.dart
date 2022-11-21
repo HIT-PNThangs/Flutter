@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../ui/theme/app_colors.dart';
+import '../ui/widget/common_screen.dart';
+
 class AppController extends GetxController {
   List list = [];
 
@@ -15,9 +18,9 @@ class AppController extends GetxController {
 
   @override
   void onReady() {
-    // StyleOfStatusBarContent styleOfStatusBarContent = StyleOfStatusBarContent(StatusBarStyle.light);
-    // SystemChrome.setSystemUIOverlayStyle((styleOfStatusBarContent.androidStyle ?? SystemUiOverlayStyle.light)
-    //     .copyWith(statusBarColor: AppColors.transparent, statusBarBrightness: styleOfStatusBarContent.iosStyle));
+    StyleOfStatusBarContent styleOfStatusBarContent = StyleOfStatusBarContent(StatusBarStyle.light);
+    SystemChrome.setSystemUIOverlayStyle((styleOfStatusBarContent.androidStyle ?? SystemUiOverlayStyle.light)
+        .copyWith(statusBarColor: AppColors.transparent, statusBarBrightness: styleOfStatusBarContent.iosStyle));
 
     // initAdInterstitial();
     // initAdReward();

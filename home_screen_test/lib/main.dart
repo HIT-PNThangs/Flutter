@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
         initialBinding: AppBinding(),
         initialRoute: AppRoute.splash_screen,
         getPages: AppPages.pages,
-        theme: ThemeData(brightness: Brightness.dark)
-    );
+        theme: ThemeData(brightness: Brightness.dark));
   }
 }

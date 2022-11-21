@@ -17,9 +17,9 @@ class CategoryScreen extends GetView<CategoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        Expanded(
-          flex: 1,
+      body: Stack(children: [
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -64,37 +64,39 @@ class CategoryScreen extends GetView<CategoryController> {
             ],
           ),
         ),
-        Expanded(
-          flex: 3,
-          child: GridView.count(
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top * 2, left: 6.0.sp, right: 6.0.sp),
+          child: GridView.builder(
+              itemCount: controller.listCommon.length,
               shrinkWrap: true,
-              crossAxisCount: 3,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              childAspectRatio: MediaQuery.of(context).size.width /
-                  (MediaQuery.of(context).size.height),
-              children: controller.listCommon
-                  .map((e) => Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12.0.sp),
-                            child: CommonImageNetwork(
-                              url: e['wallpapers'][0]['image'],
-                              width: 100.0.sp,
-                              height: 220.0.sp,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Container(
-                            alignment: const Alignment(-1, 1),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(e['title']),
-                            ),
-                          )
-                        ],
-                      ))
-                  .toList()),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: MediaQuery.of(context).size.width /
+                    (MediaQuery.of(context).size.height),
+              ),
+              itemBuilder: (context, index) => Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0.sp),
+                        child: CommonImageNetwork(
+                          url: controller.listCommon[index]['wallpapers'][0]
+                              ['image'],
+                          width: 100.0.sp,
+                          height: 220.0.sp,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Container(
+                        alignment: const Alignment(-1, 1),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(controller.listCommon[index]['title']),
+                        ),
+                      )
+                    ],
+                  )),
         ),
       ]),
     );

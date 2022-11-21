@@ -5,7 +5,6 @@ class AppImages {
   static const String bg_splash1 = '${_internalImagePath}bg_splash1.png';
   static const String ic_logo = '${_internalImagePath}ic_logo.svg';
 
-
   // Intro Screen
   static const String bg_intro1 = '${_internalImagePath}bg_intro1.png';
   static const String bg_intro2 = '${_internalImagePath}bg_intro2.png';
@@ -13,18 +12,18 @@ class AppImages {
   static const String bg_intro_button = '${_internalImagePath}bg_intro_button.png';
   static const String bg_button = '${_internalImagePath}bg_button.png';
 
-
   // Home Screen
   static const String category_icon = "${_internalImagePath}category_icon.svg";
   static const String crown = "${_internalImagePath}crown.svg";
   static const String eyes = "${_internalImagePath}eyes.svg";
   static const String eyes1 = "${_internalImagePath}eyes1.svg";
   static const String add = "${_internalImagePath}add.svg";
-
+  static const String share_app_home = "${_internalImagePath}share_app_home.svg";
 
   // Category Screen
   static const String ic_close = "${_internalImagePath}ic_close.svg";
-
+  static const String ic_back = "${_internalImagePath}back.svg";
+  static const String ic_check = "${_internalImagePath}check.svg";
 
   // Setting Screen
   static const String ic_placeholder = "${_internalImagePath}ic_placeholder.png";
@@ -39,7 +38,9 @@ class AppImages {
   static const String pivacy = "${_internalImagePath}pivacy.svg";
   static const String setting = "${_internalImagePath}setting.svg";
   static const String share_app = "${_internalImagePath}share_app.svg";
-  static const String term_of_condition =
-      "${_internalImagePath}term_of_condition.svg";
+  static const String term_of_condition = "${_internalImagePath}term_of_condition.svg";
 
+  // Subscriber Screen
+  static const String ic_check_subscriber = "${_internalImagePath}ic_check.png";
+  static const String bg_pre_top = "${_internalImagePath}bg_pre_top.png";
 }
