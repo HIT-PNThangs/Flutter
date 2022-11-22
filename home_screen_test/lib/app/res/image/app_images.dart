@@ -7,15 +7,14 @@ class AppImages {
 
 
   // Splash Screen
-  static const String bg_splash1 = '${_internalImagePath}bg_splash1.png';
+  static const String bg_splash1 = '${_internalImagePath}image_splash.png';
   static const String ic_logo = '${_internalImagePath}ic_logo.svg';
 
   // Intro Screen
   static const String bg_intro1 = '${_internalImagePath}bg_intro1.png';
   static const String bg_intro2 = '${_internalImagePath}bg_intro2.png';
   static const String bg_intro3 = '${_internalImagePath}bg_intro3.png';
-  static const String bg_intro_button = '${_internalImagePath}bg_intro_button.png';
-  static const String bg_button = '${_internalImagePath}bg_button.png';
+  static const String phone = '${_internalImagePath}phone.png';
 
   // Home Screen
   static const String category_icon = "${_internalImagePath}category_icon.svg";

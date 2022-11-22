@@ -33,6 +33,7 @@ dependencies:
   in_app_review: ^2.0.4
   store_redirect: ^2.0.1
   image_picker: ^0.8.6
+  async_wallpaper: ^2.0.1
 
 dev_dependencies:
   flutter_test:

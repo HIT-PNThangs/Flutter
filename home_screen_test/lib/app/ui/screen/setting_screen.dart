@@ -205,7 +205,7 @@ class SettingScreen extends GetView<HomeController> {
                     ),
                   ),
                   buildItemContainer(
-                    onPressed: () => controller.onPressTerm(),
+                    onPressed: () => controller.onPressShare(),
                     child: Row(
                       children: [
                         SvgPicture.asset(

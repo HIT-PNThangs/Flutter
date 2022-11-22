@@ -17,7 +17,7 @@ class CommonImageNetwork extends StatelessWidget {
   final double? loadingSize;
 
   const CommonImageNetwork({super.key,
-    @required this.url,
+    required this.url,
     this.placeholder,
     this.errorWidget,
     this.fit,
@@ -34,7 +34,7 @@ class CommonImageNetwork extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.ic_placeholder),
-            fit: BoxFit.contain,
+            fit: BoxFit.scaleDown,
           ),
         ),
         child: Center(

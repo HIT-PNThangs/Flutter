@@ -24,28 +24,29 @@ class SplashScreen extends GetView<SplashController> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.bg_splash1),
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 64.0.sp),
-            SvgPicture.asset(
-              AppImages.ic_logo,
-              width: Get.width / 3,
-              height: Get.height / 3,
-            ),
-            SizedBox(height: 32.0.sp),
-            Text(
-              'AirLive - 4K Live Wallpapers',
-              style: TextStyle(
-                color: AppColors.orange,
-                fontSize: 24.0.sp,
-                fontFamily: AppFonts.robotoMedium,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                AppImages.ic_logo,
+                width: Get.width / 4,
+                height: Get.height / 4,
+                fit: BoxFit.scaleDown,
               ),
-            ),
-          ],
+              Text(
+                'Airlive - Wallpaper',
+                style: TextStyle(
+                  color: AppColors.orange,
+                  fontSize: 16.0.sp,
+                  fontFamily: AppFonts.robotoRegular,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

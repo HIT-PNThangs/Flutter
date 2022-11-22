@@ -14,9 +14,12 @@ class SubscribeController extends GetxController {
 
   final AppController _appController = Get.find<AppController>();
 
+  RxBool showClose = false.obs;
+
   @override
   void onInit() {
     asyncInitState();
+    showCloseButton();
     super.onInit();
   }
 
@@ -105,5 +108,15 @@ class SubscribeController extends GetxController {
 
   _openLink(String url) async {
     await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+  }
+
+  showCloseButton() async {
+    Future.delayed(const Duration(seconds: 5), () {
+      showClose.value = !showClose.value;
+    });
+  }
+
+  changeValueShowClose() {
+    showClose.value = !showClose.value;
   }
 }

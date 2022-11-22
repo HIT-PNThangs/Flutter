@@ -3,7 +3,6 @@ import 'package:transformer_page_view/transformer_page_view.dart';
 
 import '../main.dart';
 import '../texts.dart';
-import '../transformers/my_transformer.dart';
 import '../transformers/transformers.dart';
 import '../widget/card_widget.dart';
 
