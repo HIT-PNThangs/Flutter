@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../route/app_pages.dart';
 import '../ui/theme/app_colors.dart';
 import '../ui/widget/common_screen.dart';
 
@@ -12,8 +13,6 @@ class AppController extends GetxController {
 
   RxBool isPremium = false.obs;
 
-  // InterstitialAd? interstitialAd;
-  // RewardedAd? rewardedAd;
   RxList<FileSystemEntity> listFileDownloaded = RxList();
 
   @override
@@ -22,15 +21,9 @@ class AppController extends GetxController {
     SystemChrome.setSystemUIOverlayStyle((styleOfStatusBarContent.androidStyle ?? SystemUiOverlayStyle.light)
         .copyWith(statusBarColor: AppColors.transparent, statusBarBrightness: styleOfStatusBarContent.iosStyle));
 
-    // initAdInterstitial();
-    // initAdReward();
-
     updateDownloadedImages();
-
     super.onReady();
   }
-
-
 
   // initAdInterstitial() {
   //   InterstitialAd.load(
@@ -46,7 +39,7 @@ class AppController extends GetxController {
   //     ),
   //   );
   // }
-
+  //
   // initAdReward() {
   //   RewardedAd.load(
   //     adUnitId: AppConstant.IDRewardAppAd,
@@ -82,17 +75,6 @@ class AppController extends GetxController {
   //   } else {
   //     goToPreview(item['image'], item['tag'], item['video'], 'URL');
   //   }
-  // }
-
-  // goToPreview(String link, String tag, String video, String type) {
-  //   interstitialAd = null;
-  //   initAdInterstitial();
-  //   Get.toNamed(AppRoute.preview_screen, arguments: {
-  //     'type': type,
-  //     'link': link,
-  //     'tag': tag,
-  //     'video': video,
-  //   });
   // }
 
   updateDownloadedImages() async {

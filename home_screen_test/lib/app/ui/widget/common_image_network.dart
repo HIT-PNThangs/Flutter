@@ -39,8 +39,8 @@ class CommonImageNetwork extends StatelessWidget {
         ),
         child: Center(
           child: SizedBox(
-            width: loadingSize ?? 20.0.sp,
-            height: loadingSize ?? 20.0.sp,
+            width: 20.0.sp,
+            height: 20.0.sp,
             child: const CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
               strokeWidth: 2,
@@ -56,16 +56,16 @@ class CommonImageNetwork extends StatelessWidget {
     return isNullEmpty(url)
         ? const Icon(Icons.error)
         : CachedNetworkImage(
-            memCacheWidth: (width ?? 0.0) > 0.0 ? ((width?.toInt() ?? 0) + 150) : 100,
-            width: width,
-            height: height,
-            imageUrl: url ?? '',
-            placeholder: placeholder ?? (context, url) => buildPlaceHolder(),
-            errorWidget: (context, url, error) {
-              return errorWidget ?? buildPlaceHolder();
-            },
-            fit: fit ?? BoxFit.contain,
-            cacheManager: CacheManager(Config('ImageCacheKey', stalePeriod: const Duration(days: 100))),
-          );
+      memCacheWidth: (width ?? 0.0) > 0.0 ? ((width?.toInt() ?? 0) + 150) : 100,
+      width: width,
+      height: height,
+      imageUrl: url ?? '',
+      placeholder: placeholder ?? (context, url) => buildPlaceHolder(),
+      errorWidget: (context, url, error) {
+        return errorWidget ?? buildPlaceHolder();
+      },
+      fit: fit ?? BoxFit.contain,
+      cacheManager: CacheManager(Config('ImageCacheKey', stalePeriod: const Duration(days: 100))),
+    );
   }
 }

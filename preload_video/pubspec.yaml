@@ -1,0 +1,42 @@
+name: preload_video
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  equatable: ^2.0.5
+  dio: ^4.0.6
+  rxdart: ^0.27.7
+  iconsax: ^0.0.8
+  flutter_svg: ^1.1.6
+  video_player: ^2.4.8
+  ionicons: ^0.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lib/app/res/icons/
+
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: lib/app/res/fonts/Nunito-Regular.ttf
+
+    - family: NunitoBold
+      fonts:
+        - asset: lib/app/res/fonts/Nunito-ExtraBold.ttf

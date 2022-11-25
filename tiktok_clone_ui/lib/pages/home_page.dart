@@ -3,10 +3,6 @@ import 'package:video_player/video_player.dart';
 
 import '../constant/data_json.dart';
 import '../theme/colors.dart';
-import '../widgets/column_social_icon.dart';
-import '../widgets/header_home_page.dart';
-import '../widgets/left_panel.dart';
-import '../widgets/tik_tok_icons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,7 +23,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _tabController.dispose();
   }
@@ -157,87 +152,8 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: widget.size.height,
-                  width: widget.size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 20, bottom: 10),
-                    child: SafeArea(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          HeaderHomePage(),
-                          Expanded(child: Row(
-                            children: <Widget>[
-                              LeftPanel(
-                                size: widget.size,
-                                name: "${widget.name}",
-                                caption: "${widget.caption}",
-                                songName: "${widget.songName}",
-                              ),
-                              RightPanel(
-                                size: widget.size,
-                                likes: "${widget.likes}",
-                                comments: "${widget.comments}",
-                                shares: "${widget.shares}",
-                                profileImg: "${widget.profileImg}",
-                                albumImg: "${widget.albumImg}",
-                              )
-                            ],
-                          ))
-                        ],
-                      ),
-                    ),
-                  ),
-                )
               ],
             )),
-      ),
-    );
-  }
-}
-
-class RightPanel extends StatelessWidget {
-  final String? likes;
-  final String? comments;
-  final String? shares;
-  final String? profileImg;
-  final String? albumImg;
-
-  const RightPanel({
-    Key? key,
-    required this.size,
-    this.likes,
-    this.comments,
-    this.shares,
-    this.profileImg,
-    this.albumImg,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        height: size.height,
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: size.height * 0.3,
-            ),
-            Expanded(child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                getProfile(profileImg),
-                getIcons(TikTokIcons.heart, likes, 35.0),
-                getIcons(TikTokIcons.chat_bubble, comments, 35.0),
-                getIcons(TikTokIcons.reply, shares, 25.0),
-                getAlbum(albumImg)
-              ],
-            ))
-          ],
-        ),
       ),
     );
   }

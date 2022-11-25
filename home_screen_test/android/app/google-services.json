@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "449951489838",
+    "project_id": "live-wallpaper-iphone",
+    "storage_bucket": "live-wallpaper-iphone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449951489838:android:300e0a9d1ae4cdc01fe4bf",
+        "android_client_info": {
+          "package_name": "com.vietapps.airlive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449951489838-kncldhlpjv3of6o26qfcvmvqtv1vf8pl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-sTFuAuSy87BWmiW4iHirQMweBAODDCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449951489838-kncldhlpjv3of6o26qfcvmvqtv1vf8pl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "449951489838-lih5fc0fpicgnp25cnakcgfbp11ha8et.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vietapps.livewallpapers"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

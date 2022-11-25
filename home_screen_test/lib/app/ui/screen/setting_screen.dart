@@ -136,29 +136,6 @@ class SettingScreen extends GetView<HomeController> {
                   ),
                   SizedBox(height: 4.0.sp),
                   buildItemContainer(
-                    onPressed: () => controller.onPressTutorial(),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          AppImages.how_to_use,
-                          width: 32.0.sp,
-                          height: 32.0.sp,
-                          fit: BoxFit.contain,
-                        ),
-                        SizedBox(width: 12.0.sp),
-                        DefaultTextStyle(
-                            style: TextStyle(
-                              color: AppColors.orange.withOpacity(0.9),
-                              fontSize: 18.0.sp,
-                              fontFamily: AppFonts.robotoMedium,
-                            ),
-                            child: const Text(
-                              'How to use',
-                            ))
-                      ],
-                    ),
-                  ),
-                  buildItemContainer(
                     onPressed: () => controller.onPressPrivacy(),
                     child: Row(
                       children: [

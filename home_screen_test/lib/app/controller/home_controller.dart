@@ -25,7 +25,7 @@ class HomeController extends GetxController {
   RxInt currentIndexCategory = 0.obs;
 
   List listCommon = [];
-  RxList<dynamic> listImage = RxList();
+  RxList<dynamic> listWallpapers = RxList();
 
   RxString title = "".obs;
 
@@ -58,8 +58,8 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
 
-    listImage.clear();
-    listImage.addAll(appController.list[currentIndexCategory.value]['wallpapers']);
+    listWallpapers.clear();
+    listWallpapers.addAll(appController.list[currentIndexCategory.value]['wallpapers']);
 
     title.value = appController.list[currentIndexCategory.value]['title'];
 
@@ -113,12 +113,12 @@ class HomeController extends GetxController {
   changeIndexCategory(int value) {
     currentIndexCategory.value = value;
 
-    listImage.clear();
-    listImage.addAll(appController.list[currentIndexCategory.value]['wallpapers']);
+    listWallpapers.clear();
+    listWallpapers.addAll(appController.list[currentIndexCategory.value]['wallpapers']);
 
     title.value = appController.list[currentIndexCategory.value]['title'];
 
-    listImage.refresh();
+    listWallpapers.refresh();
     title.refresh();
   }
 
@@ -170,10 +170,6 @@ class HomeController extends GetxController {
 
   onPressPremium() {
     Get.toNamed(AppRoute.subscriber_screen);
-  }
-
-  onPressTutorial() {
-    Get.toNamed(AppRoute.help_screen);
   }
 
   onPressShare() {
@@ -379,11 +375,12 @@ class HomeController extends GetxController {
     try {
       showDownloading.value = true;
 
-      String url = listImage[currentIndexImage.value]['image'];
+      String url = listWallpapers[currentIndexImage.value]['image'];
 
       switch (typeWallpaper) {
         case 0:
           try {
+
             result = await AsyncWallpaper.setWallpaper(
               url: url,
               wallpaperLocation: AsyncWallpaper.HOME_SCREEN,

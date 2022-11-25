@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:home_screen_test/app/res/font/app_fonts.dart';
 import 'package:home_screen_test/util/extensions.dart';
-import 'package:loop_page_view/loop_page_view.dart';
 
 import '../../controller/app_controller.dart';
 import '../../controller/home_controller.dart';
@@ -14,8 +12,8 @@ import '../../route/app_pages.dart';
 import '../theme/app_colors.dart';
 import '../widget/common_image_network.dart';
 import '../widget/common_screen.dart';
-import '../widget/header_button.dart';
 import '../widget/touchable_widget.dart';
+import '../widget/video_player_item.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
@@ -23,43 +21,28 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScreen(child: Scaffold(
+    return CommonScreen(
+        child: Scaffold(
       body: Obx(() => controller.review.value == false
           ? Stack(
               alignment: const Alignment(1, 1),
               children: [
                 // load image
-                LoopPageView.builder(
-                  controller: controller.loopPageController,
-                  itemCount: controller.listImage.length,
-                  onPageChanged: (value) => controller.changeImage(value),
-                  physics: const NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
+                PageView.builder(
                   itemBuilder: (context, index) {
-                    return Obx(() => CommonImageNetwork(
-                          url: controller.listImage[controller.currentIndexImage.value]['image'],
-                          width: Get.width,
-                          height: Get.height,
-                          fit: BoxFit.cover,
-                        ));
-                    // return Obx(() => controller.listImage[controller.currentIndexImage.value]['type'] == 1
-                    //     ? Obx(() => CommonImageNetwork(
-                    //           url: controller.listImage[controller.currentIndexImage.value]['image'],
-                    //           width: Get.width,
-                    //           height: Get.height,
-                    //           fit: BoxFit.cover,
-                    //         ))
-                    //     : Obx(
-                    //         () => Container(
-                    //           color: Colors.white,
-                    //           child: Center(
-                    //             child: Text(
-                    //               "Video ${controller.currentIndexImage.value}",
-                    //               style: const TextStyle(color: Colors.black),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ));
+                    return controller.listWallpapers[controller.currentIndexImage.value]['type'] == 0
+                        ? CommonImageNetwork(
+                            url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                            width: Get.width,
+                            height: Get.height,
+                            fit: BoxFit.cover,
+                            loadingSize: 80.0.sp,
+                          )
+                        : VideoPlayItem(
+                            videoUrl: controller.listWallpapers[controller.currentIndexImage.value]['video'],
+                            snappedPageIndex: controller.currentIndexImage.value,
+                            currentIndex: index,
+                          );
                   },
                 ),
                 // Category title
@@ -321,15 +304,16 @@ class HomeScreen extends GetView<HomeController> {
                               selectionOverlay: const CupertinoPickerDefaultSelectionOverlay(
                                 background: Colors.transparent,
                               ),
-                              itemExtent: 80,
+                              itemExtent: 80.0.sp,
                               looping: true,
-                              children: controller.listImage
+                              children: controller.listWallpapers
                                   .map((e) => RotatedBox(
                                       quarterTurns: 1,
                                       child: CommonImageNetwork(
                                         url: e['image'],
-                                        width: 32,
-                                        height: 64,
+                                        width: 32.0.sp,
+                                        height: 64.0.sp,
+                                        loadingSize: 40.0.sp,
                                       )))
                                   .toList()),
                         )),
@@ -341,12 +325,23 @@ class HomeScreen extends GetView<HomeController> {
               alignment: const Alignment(1, 1),
               children: [
                 // load image
-                Obx(() => CommonImageNetwork(
-                      url: controller.listImage[controller.currentIndexImage.value]['image'],
+                PageView.builder(
+                  itemBuilder: (context, index) {
+                    return controller.listWallpapers[controller.currentIndexImage.value]['type'] == 0
+                        ? CommonImageNetwork(
+                      url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
                       width: Get.width,
                       height: Get.height,
                       fit: BoxFit.cover,
-                    )),
+                      loadingSize: 80.0.sp,
+                    )
+                        : VideoPlayItem(
+                      videoUrl: controller.listWallpapers[controller.currentIndexImage.value]['video'],
+                      snappedPageIndex: controller.currentIndexImage.value,
+                      currentIndex: index,
+                    );
+                  },
+                ),
                 // In app purchase, Review, Share app button group
                 Container(
                   alignment: const Alignment(0.9, -1),
@@ -466,51 +461,51 @@ class HomeScreen extends GetView<HomeController> {
                                 showModalBottomSheet(
                                     context: context,
                                     builder: ((context) => Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          TouchableWidget(
-                                            onPressed: () => controller.applyWallpaper(0),
-                                            child: Text(
-                                              'Apply to Home screen',
-                                              style: TextStyle(
-                                                color: AppColors.white,
-                                                fontSize: 16.0.sp,
-                                                fontFamily: AppFonts.robotoRegular,
+                                          padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              TouchableWidget(
+                                                onPressed: () => controller.applyWallpaper(0),
+                                                child: Text(
+                                                  'Apply to Home screen',
+                                                  style: TextStyle(
+                                                    color: AppColors.white,
+                                                    fontSize: 16.0.sp,
+                                                    fontFamily: AppFonts.robotoRegular,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          const Divider(height: 1, color: AppColors.primary),
-                                          TouchableWidget(
-                                            onPressed: () => controller.applyWallpaper(1),
-                                            child: Text(
-                                              'Apply to Lock screen',
-                                              style: TextStyle(
-                                                color: AppColors.white,
-                                                fontSize: 16.0.sp,
-                                                fontFamily: AppFonts.robotoRegular,
+                                              const Divider(height: 1, color: AppColors.primary),
+                                              TouchableWidget(
+                                                onPressed: () => controller.applyWallpaper(1),
+                                                child: Text(
+                                                  'Apply to Lock screen',
+                                                  style: TextStyle(
+                                                    color: AppColors.white,
+                                                    fontSize: 16.0.sp,
+                                                    fontFamily: AppFonts.robotoRegular,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          const Divider(height: 1, color: AppColors.primary),
-                                          TouchableWidget(
-                                            onPressed: () => controller.applyWallpaper(2),
-                                            child: Text(
-                                              'Apply to Both screens',
-                                              style: TextStyle(
-                                                color: AppColors.white,
-                                                fontSize: 16.0.sp,
-                                                fontFamily: AppFonts.robotoRegular,
+                                              const Divider(height: 1, color: AppColors.primary),
+                                              TouchableWidget(
+                                                onPressed: () => controller.applyWallpaper(2),
+                                                child: Text(
+                                                  'Apply to Both screens',
+                                                  style: TextStyle(
+                                                    color: AppColors.white,
+                                                    fontSize: 16.0.sp,
+                                                    fontFamily: AppFonts.robotoRegular,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              const Divider(height: 1, color: AppColors.primary),
+                                              SizedBox(height: 24.0.sp),
+                                            ],
                                           ),
-                                          const Divider(height: 1, color: AppColors.primary),
-                                          SizedBox(height: 24.0.sp),
-                                        ],
-                                      ),
-                                    )));
+                                        )));
                               },
                               child: Text(
                                 "Set",
@@ -627,15 +622,16 @@ class HomeScreen extends GetView<HomeController> {
                               selectionOverlay: const CupertinoPickerDefaultSelectionOverlay(
                                 background: Colors.transparent,
                               ),
-                              itemExtent: 80,
+                              itemExtent: 80.0.sp,
                               looping: true,
-                              children: controller.listImage
+                              children: controller.listWallpapers
                                   .map((e) => RotatedBox(
                                       quarterTurns: 1,
                                       child: CommonImageNetwork(
                                         url: e['image'],
-                                        width: 32,
-                                        height: 64,
+                                        width: 32.0.sp,
+                                        height: 64.0.sp,
+                                        loadingSize: 40.0.sp,
                                       )))
                                   .toList()),
                         )),

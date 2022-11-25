@@ -67,5 +67,10 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation 'com.github.iamutkarshtiwari:Ananas:1.2.6'
+    implementation 'com.google.android.gms:play-services-wearable:17.1.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:video_airlive/app/util/extensions.dart';
+import 'package:video_airlive/util/extensions.dart';
 
+import '../../../util/app_validation.dart';
 import '../../res/image/app_images.dart';
-import '../../util/app_validation.dart';
+import '../theme/app_colors.dart';
 
 class CommonImageNetwork extends StatelessWidget {
   final String? url;
@@ -16,7 +17,7 @@ class CommonImageNetwork extends StatelessWidget {
   final double? loadingSize;
 
   const CommonImageNetwork({super.key,
-    @required this.url,
+    required this.url,
     this.placeholder,
     this.errorWidget,
     this.fit,
@@ -33,15 +34,15 @@ class CommonImageNetwork extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.ic_placeholder),
-            fit: BoxFit.contain,
+            fit: BoxFit.scaleDown,
           ),
         ),
         child: Center(
           child: SizedBox(
-            width: loadingSize ?? 20.0.sp,
-            height: loadingSize ?? 20.0.sp,
+            width: 20.0.sp,
+            height: 20.0.sp,
             child: const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
               strokeWidth: 2,
             ),
           ),
