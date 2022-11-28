@@ -50,27 +50,11 @@ class _HomePageState extends State<HomePage> {
 
 class VideoPlayerItem extends StatefulWidget {
   final String videoUrl;
-  final String? name;
-  final String? caption;
-  final String? songName;
-  final String? profileImg;
-  final String? likes;
-  final String? comments;
-  final String? shares;
-  final String? albumImg;
   final Size size;
 
   const VideoPlayerItem(
       {Key? key,
       required this.size,
-      this.name,
-      this.caption,
-      this.songName,
-      this.profileImg,
-      this.likes,
-      this.comments,
-      this.shares,
-      this.albumImg,
       required this.videoUrl})
       : super(key: key);
 

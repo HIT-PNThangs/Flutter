@@ -1,0 +1,78 @@
+name: flutter_ui_kit
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^1.1.6
+  go_router: ^5.2.0
+  flutter_screenutil: ^5.6.0
+  google_fonts: ^3.0.1
+  table_calendar: ^3.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/logo/
+
+    # PNGs
+    - assets/png/
+    - assets/png/m8/
+    - assets/png/m13/
+    - assets/png/m10/
+    - assets/png/m19/
+    - assets/png/m26/
+    - assets/png/m27/
+    - assets/png/m28/
+    - assets/png/m29/
+
+    # SVGs
+    - assets/svg/
+    - assets/svg/m3/
+    - assets/svg/m4/
+    - assets/svg/m6/
+    - assets/svg/m7/
+    - assets/svg/m8/
+    - assets/svg/m9/
+    - assets/svg/m11/
+    - assets/svg/m12/
+    - assets/svg/m14/
+    - assets/svg/m18/
+    - assets/svg/m19/
+    - assets/svg/m21/
+    - assets/svg/m22/
+    - assets/svg/m32/
+    - assets/png/m45/
+    - assets/svg/m51/
+    - assets/png/m52/
+    - assets/png/m30/
+    - assets/svg/m52/
+    - assets/png/m175/
+    - assets/svg/m175/
+
+    # Colors
+    - assets/color/
+
+  fonts:
+    - family: Abolition
+      fonts:
+        - asset: assets/fonts/Abolition-Regular.ttf
+
+    - family: Proxima Nova
+      fonts:
+        - asset: assets/fonts/Proxima-Nova.otf

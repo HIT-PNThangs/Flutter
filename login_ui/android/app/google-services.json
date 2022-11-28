@@ -1,0 +1,154 @@
+{
+  "project_info": {
+    "project_number": "303675115793",
+    "project_id": "flutter-f0659",
+    "storage_bucket": "flutter-f0659.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303675115793:android:845f572a16d96e3a3de4b0",
+        "android_client_info": {
+          "package_name": "com.example.login_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw2Yy6o9kuliMLrnEOcecv6vgYaBHs0HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303675115793-7b2ts5n80v76pclo5tefa4t4rp32gvas.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.pixolity.mynotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303675115793:android:ceb6e7bc578836073de4b0",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw2Yy6o9kuliMLrnEOcecv6vgYaBHs0HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303675115793-7b2ts5n80v76pclo5tefa4t4rp32gvas.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.pixolity.mynotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303675115793:android:8229a5e80a44a1e43de4b0",
+        "android_client_info": {
+          "package_name": "com.vietapps.numerology.thansohoc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw2Yy6o9kuliMLrnEOcecv6vgYaBHs0HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303675115793-7b2ts5n80v76pclo5tefa4t4rp32gvas.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.pixolity.mynotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303675115793:android:7032fc61484c4ef33de4b0",
+        "android_client_info": {
+          "package_name": "se.pixolity.mynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw2Yy6o9kuliMLrnEOcecv6vgYaBHs0HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303675115793-93afh8jpr7ohfkkombdujo3ddffdts76.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303675115793-7b2ts5n80v76pclo5tefa4t4rp32gvas.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.pixolity.mynotes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,6 +21,7 @@ class HomeController extends GetxController {
 
   List listCommon = [];
   RxList<dynamic> listWallpapers = RxList();
+  RxList<dynamic> listVideo = RxList();
 
   RxString title = "".obs;
 
@@ -49,6 +50,12 @@ class HomeController extends GetxController {
 
     listWallpapers.clear();
     listWallpapers.addAll(appController.list[currentIndexCategory.value]['wallpapers']);
+
+    for(var item in listWallpapers) {
+      if(item['video'] != "") {
+        listVideo.add(item['video']);
+      }
+    }
 
     title.value = appController.list[currentIndexCategory.value]['title'];
 
@@ -135,161 +142,6 @@ class HomeController extends GetxController {
   _openLink(String url) async {
     await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
   }
-
-  // onPressApply(BuildContext context) async {
-  //   // if (video.isNotEmpty && _videoPath.isNotEmpty) {
-  //   //   _applyLiveWallpaper();
-  //   // }
-  //   // else {
-  //   //   showModalBottomSheet<void>(
-  //   //       context: context,
-  //   //       shape: RoundedRectangleBorder(
-  //   //         borderRadius: BorderRadius.vertical(
-  //   //           top: Radius.circular(14.0.sp),
-  //   //         ),
-  //   //       ),
-  //   //       isScrollControlled: true,
-  //   //       builder: (btsContext) {
-  //   //         return Container(
-  //   //           padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-  //   //           child: Column(
-  //   //             mainAxisSize: MainAxisSize.min,
-  //   //             crossAxisAlignment: CrossAxisAlignment.start,
-  //   //             children: [
-  //   //               Row(
-  //   //                 mainAxisAlignment: MainAxisAlignment.end,
-  //   //                 children: [
-  //   //                   Padding(
-  //   //                     padding: EdgeInsets.only(top: 4.0.sp),
-  //   //                     child: HeaderButton(
-  //   //                       icon: AppImages.ic_close,
-  //   //                       iconColor: AppColors.white,
-  //   //                       backgroundColor: AppColors.black.withOpacity(0.3),
-  //   //                       onPressed: Get.back,
-  //   //                       iconHeight: 24.0.sp,
-  //   //                       iconWidth: 24.0.sp,
-  //   //                       mini: true,
-  //   //                     ),
-  //   //                   ),
-  //   //                 ],
-  //   //               ),
-  //   //               TouchableWidget(
-  //   //                 onPressed: () => _applyWallpaper(0),
-  //   //                 child: Text(
-  //   //                   'Apply to Home screen',
-  //   //                   style: TextStyle(
-  //   //                     color: AppColors.blackText,
-  //   //                     fontSize: 16.0.sp,
-  //   //                     fontFamily: AppFonts.robotoRegular,
-  //   //                   ),
-  //   //                 ),
-  //   //               ),
-  //   //               Divider(height: 1, color: AppColors.primary),
-  //   //               TouchableWidget(
-  //   //                 onPressed: () => _applyWallpaper(1),
-  //   //                 child: Text(
-  //   //                   'Apply to Lock screen',
-  //   //                   style: TextStyle(
-  //   //                     color: AppColors.blackText,
-  //   //                     fontSize: 16.0.sp,
-  //   //                     fontFamily: AppFonts.robotoRegular,
-  //   //                   ),
-  //   //                 ),
-  //   //               ),
-  //   //               Divider(height: 1, color: AppColors.primary),
-  //   //               TouchableWidget(
-  //   //                 onPressed: () => _applyWallpaper(2),
-  //   //                 child: Text(
-  //   //                   'Apply to Both screens',
-  //   //                   style: TextStyle(
-  //   //                     color: AppColors.blackText,
-  //   //                     fontSize: 16.0.sp,
-  //   //                     fontFamily: AppFonts.robotoRegular,
-  //   //                   ),
-  //   //                 ),
-  //   //               ),
-  //   //               Divider(height: 1, color: AppColors.primary),
-  //   //               SizedBox(height: 24.0.sp),
-  //   //             ],
-  //   //           ),
-  //   //         );
-  //   //       });
-  //   // }
-  //
-  //   showModalBottomSheet<void>(
-  //       context: context,
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.vertical(
-  //           top: Radius.circular(14.0.sp),
-  //         ),
-  //       ),
-  //       isScrollControlled: true,
-  //       builder: (btsContext) {
-  //         return Container(
-  //           padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.end,
-  //                 children: [
-  //                   Padding(
-  //                     padding: EdgeInsets.only(top: 4.0.sp),
-  //                     child: HeaderButton(
-  //                       icon: AppImages.ic_close,
-  //                       iconColor: AppColors.white,
-  //                       backgroundColor: AppColors.black.withOpacity(0.3),
-  //                       onPressed: Get.back,
-  //                       iconHeight: 24.0.sp,
-  //                       iconWidth: 24.0.sp,
-  //                       mini: true,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //               TouchableWidget(
-  //                 onPressed: () => _applyWallpaper(0),
-  //                 child: Text(
-  //                   'Apply to Home screen',
-  //                   style: TextStyle(
-  //                     color: AppColors.blackText,
-  //                     fontSize: 16.0.sp,
-  //                     fontFamily: AppFonts.robotoRegular,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const Divider(height: 1, color: AppColors.primary),
-  //               TouchableWidget(
-  //                 onPressed: () => _applyWallpaper(1),
-  //                 child: Text(
-  //                   'Apply to Lock screen',
-  //                   style: TextStyle(
-  //                     color: AppColors.blackText,
-  //                     fontSize: 16.0.sp,
-  //                     fontFamily: AppFonts.robotoRegular,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const Divider(height: 1, color: AppColors.primary),
-  //               TouchableWidget(
-  //                 onPressed: () => _applyWallpaper(2),
-  //                 child: Text(
-  //                   'Apply to Both screens',
-  //                   style: TextStyle(
-  //                     color: AppColors.blackText,
-  //                     fontSize: 16.0.sp,
-  //                     fontFamily: AppFonts.robotoRegular,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const Divider(height: 1, color: AppColors.primary),
-  //               SizedBox(height: 24.0.sp),
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
 
   applyWallpaper(int typeWallpaper) async {
     Get.back();

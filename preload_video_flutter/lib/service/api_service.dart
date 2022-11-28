@@ -1,4 +1,5 @@
-import 'package:flutter_preload_videos/core/constants.dart';
+
+import '../core/constants.dart';
 
 class ApiService {
   static final List<String> _videos = [

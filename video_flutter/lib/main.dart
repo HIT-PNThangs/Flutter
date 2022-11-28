@@ -58,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _initPlayer() async {
     videoPlayerController =
         VideoPlayerController.network('https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4');
+
     await videoPlayerController.initialize();
 
     chewieController = ChewieController(

@@ -29,6 +29,13 @@ class _VideoPlayItemState extends State<VideoPlayItem> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    videoPlayerController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     widget.snappedPageIndex == widget.currentIndex ? videoPlayerController.play() : videoPlayerController.pause();
 
