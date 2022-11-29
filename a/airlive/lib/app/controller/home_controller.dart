@@ -38,7 +38,7 @@ class HomeController extends GetxController {
   Rx<Widget> containerBanner = Container().obs;
 
   FixedExtentScrollController scrollController = FixedExtentScrollController();
-  PageController loopPageController = PageController(initialPage: 0);
+  PageController pageController = PageController(initialPage: 0);
 
   bool isAdRewardDone = false;
   RxBool showRewardSuccessView = false.obs;
@@ -64,7 +64,7 @@ class HomeController extends GetxController {
 
   changeIndexImage(int value) {
     currentIndexImage.value = value;
-    loopPageController.jumpToPage(value);
+    pageController.jumpToPage(value);
     // scrollController.jumpToItem(value);
   }
 

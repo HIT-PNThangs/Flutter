@@ -40,7 +40,7 @@ class SplashScreen extends GetView<SplashController> {
               Text(
                 'Airlive - Wallpaper',
                 style: TextStyle(
-                  color: AppColors.orange,
+                  color: AppColors.white,
                   fontSize: 16.0.sp,
                   fontFamily: AppFonts.robotoRegular,
                 ),

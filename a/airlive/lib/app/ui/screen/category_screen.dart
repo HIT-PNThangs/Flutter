@@ -75,7 +75,7 @@ class CategoryScreen extends GetView<HomeController> {
                       onTap: () {
                         if(index != controller.currentIndexImage) {
                           controller.changeIndexCategory(index);
-                          // controller.changeIndexImage(0);
+                          controller.changeIndexImage(0);
                           Get.back();
                         }
                       },

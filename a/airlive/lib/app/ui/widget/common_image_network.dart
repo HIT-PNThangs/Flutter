@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import '../../../util/extensions.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../util/app_validation.dart';
+import '../../../util/extensions.dart';
 import '../../res/image/app_images.dart';
 import '../theme/app_colors.dart';
 
@@ -17,6 +18,7 @@ class CommonImageNetwork extends StatelessWidget {
   final double? loadingSize;
 
   const CommonImageNetwork({
+    Key? key,
     required this.url,
     this.placeholder,
     this.errorWidget,
@@ -24,7 +26,7 @@ class CommonImageNetwork extends StatelessWidget {
     this.width,
     this.height,
     this.loadingSize,
-  });
+  }) : super(key: key);
 
   Widget buildPlaceHolder() {
     return Center(
@@ -35,6 +37,7 @@ class CommonImageNetwork extends StatelessWidget {
           image: DecorationImage(
             image: AssetImage(AppImages.ic_placeholder),
             fit: BoxFit.scaleDown,
+            opacity: 0.6
           ),
         ),
         child: Center(
@@ -56,16 +59,16 @@ class CommonImageNetwork extends StatelessWidget {
     return isNullEmpty(url)
         ? const Icon(Icons.error)
         : CachedNetworkImage(
-      memCacheWidth: (width ?? 0.0) > 0.0 ? ((width?.toInt() ?? 0) + 150) : 100,
-      width: width,
-      height: height,
-      imageUrl: url ?? '',
-      placeholder: placeholder ?? (context, url) => buildPlaceHolder(),
-      errorWidget: (context, url, error) {
-        return errorWidget ?? buildPlaceHolder();
-      },
-      fit: fit ?? BoxFit.contain,
-      cacheManager: CacheManager(Config('ImageCacheKey', stalePeriod: const Duration(days: 100))),
-    );
+            memCacheWidth: (width ?? 0.0) > 0.0 ? ((width?.toInt() ?? 0) + 150) : 100,
+            width: width,
+            height: height,
+            imageUrl: url ?? '',
+            placeholder: placeholder ?? (context, url) => buildPlaceHolder(),
+            errorWidget: (context, url, error) {
+              return errorWidget ?? buildPlaceHolder();
+            },
+            fit: fit ?? BoxFit.contain,
+            cacheManager: CacheManager(Config('ImageCacheKey', stalePeriod: const Duration(days: 100))),
+          );
   }
 }

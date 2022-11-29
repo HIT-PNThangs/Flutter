@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app/binding/app_binding.dart';
+import 'app/res/font/app_fonts.dart';
 import 'app/route/app_pages.dart';
 
 void main() {
@@ -18,6 +19,6 @@ class MyApp extends StatelessWidget {
         initialBinding: AppBinding(),
         initialRoute: AppRoute.splash_screen,
         getPages: AppPages.pages,
-        theme: ThemeData(brightness: Brightness.dark));
+        theme: ThemeData(brightness: Brightness.dark, fontFamily: AppFonts.robotoRegular));
   }
 }

@@ -7,14 +7,8 @@ class AppImages {
 
 
   // Splash Screen
-  static const String bg_splash1 = '${_internalImagePath}image_splash.png';
-  static const String ic_logo = '${_internalImagePath}ic_logo.svg';
-
-  // Intro Screen
-  static const String bg_intro1 = '${_internalImagePath}bg_intro1.png';
-  static const String bg_intro2 = '${_internalImagePath}bg_intro2.png';
-  static const String bg_intro3 = '${_internalImagePath}bg_intro3.png';
-  static const String phone = '${_internalImagePath}phone.png';
+  static const String bg_splash1 = '${_internalImagePath}background_splash.png';
+  static const String ic_logo = '${_internalImagePath}ic_logo_white.svg';
 
   // Home Screen
   static const String category_icon = "${_internalImagePath}category_icon.svg";
@@ -46,11 +40,4 @@ class AppImages {
   // Subscriber Screen
   static const String ic_check_subscriber = "${_internalImagePath}ic_checked.png";
   static const String frame_image = "${_internalImagePath}frame_image.png";
-
-  // Help Screen
-  static const String bg_editor = "${_internalImagePath}bg_editor.png";
-  static const String hint01 = "${_internalImagePath}01.png";
-  static const String hint02 = "${_internalImagePath}02.png";
-  static const String hint03 = "${_internalImagePath}03.png";
-  static const String hint04 = "${_internalImagePath}04.png";
 }

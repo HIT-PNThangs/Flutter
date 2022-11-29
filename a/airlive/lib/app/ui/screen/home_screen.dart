@@ -13,8 +13,6 @@ import '../../route/app_pages.dart';
 import '../theme/app_colors.dart';
 import '../widget/common_image_network.dart';
 import '../widget/common_screen.dart';
-import '../widget/touchable_widget.dart';
-import '../widget/video_player_item.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
@@ -30,8 +28,11 @@ class HomeScreen extends GetView<HomeController> {
               children: [
                 // load image
                 PageView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: controller.pageController,
                   itemBuilder: (context, index) {
                     return controller.listWallpapers[controller.currentIndexImage.value]['type'] == 0
+                        // Image
                         ? CommonImageNetwork(
                             url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
                             width: Get.width,
@@ -39,8 +40,35 @@ class HomeScreen extends GetView<HomeController> {
                             fit: BoxFit.cover,
                             loadingSize: 80.0.sp,
                           )
-                        : VideoPlayItem(
-                            videoUrl: controller.listWallpapers[controller.currentIndexImage.value]['video'],
+                        // video
+                        : Stack(
+                            children: [
+                              CommonImageNetwork(
+                                url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                                width: Get.width,
+                                height: Get.height,
+                                fit: BoxFit.cover,
+                                loadingSize: 50.0.sp,
+                              ),
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(AppRoute.preview_screen, arguments: {
+                                      "type": "Video",
+                                      "image": controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                                      "video": controller.listWallpapers[controller.currentIndexImage.value]['video']
+                                    });
+                                  },
+                                  child: SvgPicture.asset(
+                                    AppImages.ic_logo,
+                                    width: 50.0.sp,
+                                    height: 50.0.sp,
+                                    color: Colors.white.withOpacity(0.6),
+                                    fit: BoxFit.scaleDown,
+                                  ),
+                                ),
+                              )
+                            ],
                           );
                   },
                 ),
@@ -139,54 +167,63 @@ class HomeScreen extends GetView<HomeController> {
                                   overlayColor: MaterialStateProperty.all(Colors.transparent),
                                   backgroundColor: MaterialStateProperty.all(Colors.transparent)),
                               onPressed: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    builder: ((context) => Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              TouchableWidget(
-                                                onPressed: () => controller.applyWallpaper(0),
-                                                child: Text(
-                                                  'Apply to Home screen',
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontFamily: AppFonts.robotoRegular,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Divider(height: 1, color: AppColors.primary),
-                                              TouchableWidget(
-                                                onPressed: () => controller.applyWallpaper(1),
-                                                child: Text(
-                                                  'Apply to Lock screen',
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontFamily: AppFonts.robotoRegular,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Divider(height: 1, color: AppColors.primary),
-                                              TouchableWidget(
-                                                onPressed: () => controller.applyWallpaper(2),
-                                                child: Text(
-                                                  'Apply to Both screens',
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontFamily: AppFonts.robotoRegular,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Divider(height: 1, color: AppColors.primary),
-                                              SizedBox(height: 24.0.sp),
-                                            ],
-                                          ),
-                                        )));
+                                // showModalBottomSheet(
+                                //     context: context,
+                                //     builder: ((context) => Container(
+                                //           padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
+                                //           child: Column(
+                                //             mainAxisSize: MainAxisSize.min,
+                                //             crossAxisAlignment: CrossAxisAlignment.start,
+                                //             children: [
+                                //               TouchableWidget(
+                                //                 onPressed: () => controller.applyWallpaper(0),
+                                //                 child: Text(
+                                //                   'Apply to Home screen',
+                                //                   style: TextStyle(
+                                //                     color: AppColors.white,
+                                //                     fontSize: 16.0.sp,
+                                //                     fontFamily: AppFonts.robotoRegular,
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               const Divider(height: 1, color: AppColors.primary),
+                                //               TouchableWidget(
+                                //                 onPressed: () => controller.applyWallpaper(1),
+                                //                 child: Text(
+                                //                   'Apply to Lock screen',
+                                //                   style: TextStyle(
+                                //                     color: AppColors.white,
+                                //                     fontSize: 16.0.sp,
+                                //                     fontFamily: AppFonts.robotoRegular,
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               const Divider(height: 1, color: AppColors.primary),
+                                //               TouchableWidget(
+                                //                 onPressed: () => controller.applyWallpaper(2),
+                                //                 child: Text(
+                                //                   'Apply to Both screens',
+                                //                   style: TextStyle(
+                                //                     color: AppColors.white,
+                                //                     fontSize: 16.0.sp,
+                                //                     fontFamily: AppFonts.robotoRegular,
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               const Divider(height: 1, color: AppColors.primary),
+                                //               SizedBox(height: 24.0.sp),
+                                //             ],
+                                //           ),
+                                //         )));
+
+                                String type = controller.listWallpapers[controller.currentIndexImage.value]['type'] == 1
+                                    ? "Video"
+                                    : "Image";
+                                Get.toNamed(AppRoute.preview_screen, arguments: {
+                                  "type": type,
+                                  "image": controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                                  "video": controller.listWallpapers[controller.currentIndexImage.value]['video']
+                                });
                               },
                               child: Text(
                                 "Set",
@@ -323,39 +360,51 @@ class HomeScreen extends GetView<HomeController> {
               alignment: const Alignment(1, 1),
               children: [
                 // // load image
-                // PageView.builder(
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   itemBuilder: (context, index) {
-                //     return controller.listWallpapers[controller.currentIndexImage.value]['type'] == 0
-                //         ? CommonImageNetwork(
-                //             url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
-                //             width: Get.width,
-                //             height: Get.height,
-                //             fit: BoxFit.cover,
-                //             loadingSize: 80.0.sp,
-                //           )
-                //         : VideoPlayItem(
-                //             videoUrl: controller.listWallpapers[controller.currentIndexImage.value]['video'],
-                //             snappedPageIndex: controller.currentIndexImage.value,
-                //             currentIndex: index,
-                //           );
-                //   },
-                // ),
                 PageView.builder(
-                    controller: controller.loopPageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: ((context, index) {
-                      return controller.listWallpapers[controller.currentIndexImage.value]['type'] == 0
-                          ? Obx(() => CommonImageNetwork(
-                                url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
-                                width: Get.width,
-                                height: Get.height,
-                                fit: BoxFit.cover,
-                                loadingSize: 80.0.sp,
-                              ))
-                          : Obx(() => VideoPlayItem(
-                              videoUrl: controller.listWallpapers[controller.currentIndexImage.value]['video']));
-                    })),
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: controller.pageController,
+                  itemBuilder: (context, index) {
+                    return controller.listWallpapers[controller.currentIndexImage.value]['type'] == 0
+                    // Image
+                        ? CommonImageNetwork(
+                      url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                      width: Get.width,
+                      height: Get.height,
+                      fit: BoxFit.cover,
+                      loadingSize: 80.0.sp,
+                    )
+                    // video
+                        : Stack(
+                      children: [
+                        CommonImageNetwork(
+                          url: controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                          width: Get.width,
+                          height: Get.height,
+                          fit: BoxFit.cover,
+                          loadingSize: 50.0.sp,
+                        ),
+                        Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed(AppRoute.preview_screen, arguments: {
+                                "type": "Video",
+                                "image": controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                                "video": controller.listWallpapers[controller.currentIndexImage.value]['video']
+                              });
+                            },
+                            child: SvgPicture.asset(
+                              AppImages.ic_logo,
+                              width: 50.0.sp,
+                              height: 50.0.sp,
+                              color: Colors.white.withOpacity(0.6),
+                              fit: BoxFit.scaleDown,
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
                 // In app purchase, Review, Share app button group
                 Container(
                   alignment: const Alignment(0.9, -1),
@@ -472,54 +521,63 @@ class HomeScreen extends GetView<HomeController> {
                                   overlayColor: MaterialStateProperty.all(Colors.transparent),
                                   backgroundColor: MaterialStateProperty.all(Colors.transparent)),
                               onPressed: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    builder: ((context) => Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              TouchableWidget(
-                                                onPressed: () => controller.applyWallpaper(0),
-                                                child: Text(
-                                                  'Apply to Home screen',
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontFamily: AppFonts.robotoRegular,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Divider(height: 1, color: AppColors.primary),
-                                              TouchableWidget(
-                                                onPressed: () => controller.applyWallpaper(1),
-                                                child: Text(
-                                                  'Apply to Lock screen',
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontFamily: AppFonts.robotoRegular,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Divider(height: 1, color: AppColors.primary),
-                                              TouchableWidget(
-                                                onPressed: () => controller.applyWallpaper(2),
-                                                child: Text(
-                                                  'Apply to Both screens',
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontFamily: AppFonts.robotoRegular,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Divider(height: 1, color: AppColors.primary),
-                                              SizedBox(height: 24.0.sp),
-                                            ],
-                                          ),
-                                        )));
+                                // showModalBottomSheet(
+                                //     context: context,
+                                //     builder: ((context) => Container(
+                                //           padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
+                                //           child: Column(
+                                //             mainAxisSize: MainAxisSize.min,
+                                //             crossAxisAlignment: CrossAxisAlignment.start,
+                                //             children: [
+                                //               TouchableWidget(
+                                //                 onPressed: () => controller.applyWallpaper(0),
+                                //                 child: Text(
+                                //                   'Apply to Home screen',
+                                //                   style: TextStyle(
+                                //                     color: AppColors.white,
+                                //                     fontSize: 16.0.sp,
+                                //                     fontFamily: AppFonts.robotoRegular,
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               const Divider(height: 1, color: AppColors.primary),
+                                //               TouchableWidget(
+                                //                 onPressed: () => controller.applyWallpaper(1),
+                                //                 child: Text(
+                                //                   'Apply to Lock screen',
+                                //                   style: TextStyle(
+                                //                     color: AppColors.white,
+                                //                     fontSize: 16.0.sp,
+                                //                     fontFamily: AppFonts.robotoRegular,
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               const Divider(height: 1, color: AppColors.primary),
+                                //               TouchableWidget(
+                                //                 onPressed: () => controller.applyWallpaper(2),
+                                //                 child: Text(
+                                //                   'Apply to Both screens',
+                                //                   style: TextStyle(
+                                //                     color: AppColors.white,
+                                //                     fontSize: 16.0.sp,
+                                //                     fontFamily: AppFonts.robotoRegular,
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               const Divider(height: 1, color: AppColors.primary),
+                                //               SizedBox(height: 24.0.sp),
+                                //             ],
+                                //           ),
+                                //         )));
+
+                                String type = controller.listWallpapers[controller.currentIndexImage.value]['type'] == 1
+                                    ? "Video"
+                                    : "Image";
+                                Get.toNamed(AppRoute.preview_screen, arguments: {
+                                  "type": type,
+                                  "image": controller.listWallpapers[controller.currentIndexImage.value]['image'],
+                                  "video": controller.listWallpapers[controller.currentIndexImage.value]['video']
+                                });
                               },
                               child: Text(
                                 "Set",
