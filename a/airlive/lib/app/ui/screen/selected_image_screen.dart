@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 
 import '../../../util/extensions.dart';
 import '../../controller/selected_image_controller.dart';
-import '../../res/font/app_fonts.dart';
 import '../../res/image/app_images.dart';
-import '../theme/app_colors.dart';
+import '../sheet/material_bottom_sheet.dart';
+import '../sheet/modal_fit.dart';
+import '../sheet/modal_fit1.dart';
 import '../widget/common_screen.dart';
-import '../widget/touchable_widget.dart';
 
 class SelectedImageScreen extends GetView<SelectedImageController> {
   const SelectedImageScreen({Key? key}) : super(key: key);
@@ -96,54 +96,12 @@ class SelectedImageScreen extends GetView<SelectedImageController> {
                                     overlayColor: MaterialStateProperty.all(Colors.transparent),
                                     backgroundColor: MaterialStateProperty.all(Colors.transparent)),
                                 onPressed: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: ((context) => Container(
-                                            padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                TouchableWidget(
-                                                  onPressed: () => controller.applyWallpaper(0),
-                                                  child: Text(
-                                                    'Apply to Home screen',
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontFamily: AppFonts.robotoRegular,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Divider(height: 1, color: AppColors.primary),
-                                                TouchableWidget(
-                                                  onPressed: () => controller.applyWallpaper(1),
-                                                  child: Text(
-                                                    'Apply to Lock screen',
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontFamily: AppFonts.robotoRegular,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Divider(height: 1, color: AppColors.primary),
-                                                TouchableWidget(
-                                                  onPressed: () => controller.applyWallpaper(2),
-                                                  child: Text(
-                                                    'Apply to Both screens',
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontFamily: AppFonts.robotoRegular,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Divider(height: 1, color: AppColors.primary),
-                                                SizedBox(height: 24.0.sp),
-                                              ],
-                                            ),
-                                          )));
+                                  showMaterialModalBottomSheet(
+                                    expand: false,
+                                    context: context,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (context) => ModalFit(),
+                                  );
                                 },
                                 child: Text(
                                   "Set",
@@ -274,54 +232,12 @@ class SelectedImageScreen extends GetView<SelectedImageController> {
                                     overlayColor: MaterialStateProperty.all(Colors.transparent),
                                     backgroundColor: MaterialStateProperty.all(Colors.transparent)),
                                 onPressed: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: ((context) => Container(
-                                            padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                TouchableWidget(
-                                                  onPressed: () => controller.applyWallpaper(0),
-                                                  child: Text(
-                                                    'Apply to Home screen',
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontFamily: AppFonts.robotoRegular,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Divider(height: 1, color: AppColors.primary),
-                                                TouchableWidget(
-                                                  onPressed: () => controller.applyWallpaper(1),
-                                                  child: Text(
-                                                    'Apply to Lock screen',
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontFamily: AppFonts.robotoRegular,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Divider(height: 1, color: AppColors.primary),
-                                                TouchableWidget(
-                                                  onPressed: () => controller.applyWallpaper(2),
-                                                  child: Text(
-                                                    'Apply to Both screens',
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontFamily: AppFonts.robotoRegular,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Divider(height: 1, color: AppColors.primary),
-                                                SizedBox(height: 24.0.sp),
-                                              ],
-                                            ),
-                                          )));
+                                  showMaterialModalBottomSheet(
+                                    expand: false,
+                                    context: context,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (context) => ModalFit1(),
+                                  );
                                 },
                                 child: Text(
                                   "Set",

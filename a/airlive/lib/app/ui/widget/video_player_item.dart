@@ -53,14 +53,12 @@ class _VideoPlayItemState extends State<VideoPlayItem> {
                 ),
               ),
             )
-          : loadingVideo(),
+          : Container(
+              color: Colors.black,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
     );
   }
-
-  Widget loadingVideo() => Container(
-        color: Colors.black,
-        child: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
 }

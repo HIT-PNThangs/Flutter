@@ -40,6 +40,7 @@ class _MyAppState extends State<MyApp> {
     logStatus("Initializing SDK...");
 
     Map? configuration = await AppLovinMAX.initialize(_sdkKey);
+
     if (configuration != null) {
       _isInitialized = true;
 
@@ -47,6 +48,8 @@ class _MyAppState extends State<MyApp> {
 
       attachAdListeners();
     }
+
+    AppLovinMAX.loadInterstitial(_interstitialAdUnitId);
   }
 
   void attachAdListeners() {
@@ -54,6 +57,7 @@ class _MyAppState extends State<MyApp> {
     AppLovinMAX.setInterstitialListener(InterstitialListener(
       onAdLoadedCallback: (ad) {
         _interstitialLoadState = AdLoadState.loaded;
+        AppLovinMAX.loadInterstitial(_interstitialAdUnitId);
 
         // Interstitial ad is ready to be shown. AppLovinMAX.isInterstitialAdReady(_interstitial_ad_unit_id) will now return 'true'
         logStatus('Interstitial ad loaded from ${ad.networkName}');
@@ -132,26 +136,44 @@ class _MyAppState extends State<MyApp> {
                 style: const TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
-              ElevatedButton(
-                onPressed: _isInitialized
-                    ? () {
-                        AppLovinMAX.showMediationDebugger();
-                      }
-                    : null,
-                child: const Text("Mediation Debugger"),
-              ),
+              // ElevatedButton(
+              //   onPressed: _isInitialized
+              //       ? () {
+              //           AppLovinMAX.showMediationDebugger();
+              //         }
+              //       : null,
+              //   child: const Text("Mediation Debugger"),
+              // ),
+              // ElevatedButton(
+              //   onPressed: (_isInitialized && _interstitialLoadState != AdLoadState.loading)
+              //       ? () async {
+              //           bool isReady = (await AppLovinMAX.isInterstitialReady(_interstitialAdUnitId))!;
+              //
+              //           if (isReady) {
+              //             AppLovinMAX.showInterstitial(_interstitialAdUnitId);
+              //           } else {
+              //             logStatus('Loading interstitial ad...');
+              //             _interstitialLoadState = AdLoadState.loading;
+              //             AppLovinMAX.loadInterstitial(_interstitialAdUnitId);
+              //           }
+              //         }
+              //       : null,
+              //   child: Text(getInterstitialButtonTitle()),
+              // ),
               ElevatedButton(
                 onPressed: (_isInitialized && _interstitialLoadState != AdLoadState.loading)
                     ? () async {
-                        bool isReady = (await AppLovinMAX.isInterstitialReady(_interstitialAdUnitId))!;
+                        AppLovinMAX.showInterstitial(_interstitialAdUnitId);
 
-                        if (isReady) {
-                          AppLovinMAX.showInterstitial(_interstitialAdUnitId);
-                        } else {
-                          logStatus('Loading interstitial ad...');
-                          _interstitialLoadState = AdLoadState.loading;
-                          AppLovinMAX.loadInterstitial(_interstitialAdUnitId);
-                        }
+                        // bool isReady = (await AppLovinMAX.isInterstitialReady(_interstitialAdUnitId))!;
+                        //
+                        // if (isReady) {
+                        //   AppLovinMAX.showInterstitial(_interstitialAdUnitId);
+                        // } else {
+                        //   logStatus('Loading interstitial ad...');
+                        //   _interstitialLoadState = AdLoadState.loading;
+                        //   AppLovinMAX.loadInterstitial(_interstitialAdUnitId);
+                        // }
                       }
                     : null,
                 child: Text(getInterstitialButtonTitle()),

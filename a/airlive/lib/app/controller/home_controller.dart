@@ -1,19 +1,19 @@
+import 'dart:io';
+
+import 'package:airlive/app/res/image/app_images.dart';
+import 'package:airlive/util/app_constant.dart';
 import 'package:async_wallpaper/async_wallpaper.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:loop_page_view/loop_page_view.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:video_player/video_player.dart';
 
+import '../../../util/extensions.dart';
 import '../../util/app_util.dart';
 import '../route/app_pages.dart';
 import 'app_controller.dart';
-
-enum RewardType { DOWNLOAD, APPLY }
 
 class HomeController extends GetxController {
   AppController appController = Get.find<AppController>();
@@ -31,22 +31,9 @@ class HomeController extends GetxController {
 
   RxBool review = true.obs;
 
-  RxBool showDownloading = false.obs;
-  RxString type = ''.obs;
-  RxString link = ''.obs;
-  String video = '';
-  Rx<Widget> containerBanner = Container().obs;
+  NativeAd? ad;
 
-  FixedExtentScrollController scrollController = FixedExtentScrollController();
   PageController pageController = PageController(initialPage: 0);
-
-  bool isAdRewardDone = false;
-  RxBool showRewardSuccessView = false.obs;
-  RxBool hideBanner = false.obs;
-  Rx<RewardType> rewardType = RewardType.DOWNLOAD.obs;
-  Chewie? playerWidget;
-  RxBool showPlayerWidget = false.obs;
-  RxDouble scaleVideo = 1.0.obs;
 
   @override
   void onInit() {
@@ -60,18 +47,33 @@ class HomeController extends GetxController {
     listCommon.addAll(appController.list);
 
     getTime();
+
+    NativeAd(
+      adUnitId: AppConstant.IDNativeAd,
+      factoryId: 'listTile',
+      request: const AdRequest(),
+      listener: NativeAdListener(
+        onAdLoaded: (ad1) => ad = ad1 as NativeAd,
+        onAdFailedToLoad: (ad, error) {
+          // Releases an ad resource when it fails to load
+          ad.dispose();
+          debugPrint('Ad load failed (code=${error.code} message=${error.message})');
+        },
+      ),
+    ).load();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    ad?.dispose();
   }
 
   changeIndexImage(int value) {
     currentIndexImage.value = value;
     pageController.jumpToPage(value);
     // scrollController.jumpToItem(value);
-  }
-
-  changeImage(int value) {
-    currentIndexImage.value = value;
-    // scrollController.jumpToItem(value);
-    // loopPageController.jumpToPage(value);
   }
 
   getTime() {
@@ -120,48 +122,6 @@ class HomeController extends GetxController {
     review.value = !review.value;
   }
 
-  onPressCameraPick() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? photo = await picker.pickImage(source: ImageSource.camera, maxWidth: 1000);
-    Get.back();
-    if (photo != null) {
-      onPressImageByPath(photo.path);
-    }
-  }
-
-  onPressAlbum() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? photo = await picker.pickImage(source: ImageSource.gallery, maxWidth: 1000);
-    Get.back();
-    if (photo != null) {
-      onPressImageByPath(photo.path);
-    }
-  }
-
-  onPressImageByPath(String path) {
-    appController.goToPreview(path);
-
-    // if (appController.interstitialAd != null && !appController.isPremium.value) {
-    //   appController.interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
-    //     onAdShowedFullScreenContent: (InterstitialAd ad) => print('$ad onAdShowedFullScreenContent.'),
-    //     onAdDismissedFullScreenContent: (InterstitialAd ad) {
-    //       print('$ad onAdDismissedFullScreenContent.');
-    //       ad.dispose();
-    //       appController.goToPreview(path, '', '', 'PATH');
-    //     },
-    //     onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-    //       print('$ad onAdFailedToShowFullScreenContent: $error');
-    //       ad.dispose();
-    //       appController.goToPreview(path, '', '', 'PATH');
-    //     },
-    //     onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
-    //   );
-    //   appController.interstitialAd?.show();
-    // } else {
-    //   appController.goToPreview(path, '', '', 'PATH');
-    // }
-  }
-
   onPressPremium() {
     Get.toNamed(AppRoute.subscriber_screen);
   }
@@ -187,242 +147,68 @@ class HomeController extends GetxController {
     await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
   }
 
-  // onPressApply(BuildContext context) async {
-  //   // if (video.isNotEmpty && _videoPath.isNotEmpty) {
-  //   //   _applyLiveWallpaper();
-  //   // }
-  //   // else {
-  //   //   showModalBottomSheet<void>(
-  //   //       context: context,
-  //   //       shape: RoundedRectangleBorder(
-  //   //         borderRadius: BorderRadius.vertical(
-  //   //           top: Radius.circular(14.0.sp),
-  //   //         ),
-  //   //       ),
-  //   //       isScrollControlled: true,
-  //   //       builder: (btsContext) {
-  //   //         return Container(
-  //   //           padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-  //   //           child: Column(
-  //   //             mainAxisSize: MainAxisSize.min,
-  //   //             crossAxisAlignment: CrossAxisAlignment.start,
-  //   //             children: [
-  //   //               Row(
-  //   //                 mainAxisAlignment: MainAxisAlignment.end,
-  //   //                 children: [
-  //   //                   Padding(
-  //   //                     padding: EdgeInsets.only(top: 4.0.sp),
-  //   //                     child: HeaderButton(
-  //   //                       icon: AppImages.ic_close,
-  //   //                       iconColor: AppColors.white,
-  //   //                       backgroundColor: AppColors.black.withOpacity(0.3),
-  //   //                       onPressed: Get.back,
-  //   //                       iconHeight: 24.0.sp,
-  //   //                       iconWidth: 24.0.sp,
-  //   //                       mini: true,
-  //   //                     ),
-  //   //                   ),
-  //   //                 ],
-  //   //               ),
-  //   //               TouchableWidget(
-  //   //                 onPressed: () => _applyWallpaper(0),
-  //   //                 child: Text(
-  //   //                   'Apply to Home screen',
-  //   //                   style: TextStyle(
-  //   //                     color: AppColors.blackText,
-  //   //                     fontSize: 16.0.sp,
-  //   //                     fontFamily: AppFonts.robotoRegular,
-  //   //                   ),
-  //   //                 ),
-  //   //               ),
-  //   //               Divider(height: 1, color: AppColors.primary),
-  //   //               TouchableWidget(
-  //   //                 onPressed: () => _applyWallpaper(1),
-  //   //                 child: Text(
-  //   //                   'Apply to Lock screen',
-  //   //                   style: TextStyle(
-  //   //                     color: AppColors.blackText,
-  //   //                     fontSize: 16.0.sp,
-  //   //                     fontFamily: AppFonts.robotoRegular,
-  //   //                   ),
-  //   //                 ),
-  //   //               ),
-  //   //               Divider(height: 1, color: AppColors.primary),
-  //   //               TouchableWidget(
-  //   //                 onPressed: () => _applyWallpaper(2),
-  //   //                 child: Text(
-  //   //                   'Apply to Both screens',
-  //   //                   style: TextStyle(
-  //   //                     color: AppColors.blackText,
-  //   //                     fontSize: 16.0.sp,
-  //   //                     fontFamily: AppFonts.robotoRegular,
-  //   //                   ),
-  //   //                 ),
-  //   //               ),
-  //   //               Divider(height: 1, color: AppColors.primary),
-  //   //               SizedBox(height: 24.0.sp),
-  //   //             ],
-  //   //           ),
-  //   //         );
-  //   //       });
-  //   // }
-  //
-  //   showModalBottomSheet<void>(
-  //       context: context,
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.vertical(
-  //           top: Radius.circular(14.0.sp),
-  //         ),
-  //       ),
-  //       isScrollControlled: true,
-  //       builder: (btsContext) {
-  //         return Container(
-  //           padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.end,
-  //                 children: [
-  //                   Padding(
-  //                     padding: EdgeInsets.only(top: 4.0.sp),
-  //                     child: HeaderButton(
-  //                       icon: AppImages.ic_close,
-  //                       iconColor: AppColors.white,
-  //                       backgroundColor: AppColors.black.withOpacity(0.3),
-  //                       onPressed: Get.back,
-  //                       iconHeight: 24.0.sp,
-  //                       iconWidth: 24.0.sp,
-  //                       mini: true,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //               TouchableWidget(
-  //                 onPressed: () => _applyWallpaper(0),
-  //                 child: Text(
-  //                   'Apply to Home screen',
-  //                   style: TextStyle(
-  //                     color: AppColors.blackText,
-  //                     fontSize: 16.0.sp,
-  //                     fontFamily: AppFonts.robotoRegular,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const Divider(height: 1, color: AppColors.primary),
-  //               TouchableWidget(
-  //                 onPressed: () => _applyWallpaper(1),
-  //                 child: Text(
-  //                   'Apply to Lock screen',
-  //                   style: TextStyle(
-  //                     color: AppColors.blackText,
-  //                     fontSize: 16.0.sp,
-  //                     fontFamily: AppFonts.robotoRegular,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const Divider(height: 1, color: AppColors.primary),
-  //               TouchableWidget(
-  //                 onPressed: () => _applyWallpaper(2),
-  //                 child: Text(
-  //                   'Apply to Both screens',
-  //                   style: TextStyle(
-  //                     color: AppColors.blackText,
-  //                     fontSize: 16.0.sp,
-  //                     fontFamily: AppFonts.robotoRegular,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const Divider(height: 1, color: AppColors.primary),
-  //               SizedBox(height: 24.0.sp),
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
-
-  applyWallpaper(int typeWallpaper) async {
-    Get.back();
-
-    // Directory? directoryTemp = await getTemporaryDirectory();
-    // String? path = '${directoryTemp.path}/${DateTime.now().millisecondsSinceEpoch}.png';
-    //
-    // if (type.value == 'URL') {
-    //   try {
-    //     showDownloading.value = true;
-    //     final ByteData imageData = await NetworkAssetBundle(Uri.parse(link.value)).load("");
-    //     final Uint8List bytes = imageData.buffer.asUint8List();
-    //     final buffer = bytes.buffer;
-    //     await File(path).writeAsBytes(buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
-    //     showDownloading.value = false;
-    //   } on Exception catch (e) {
-    //     showDownloading.value = false;
-    //     print(e);
-    //     showToast('Something wrong, please try again later');
-    //   }
-    // } else if (type.value == 'PATH') {
-    //   path = link.value;
-    // }
-
-    String result = '';
-    try {
-      showDownloading.value = true;
-
-      String url = listWallpapers[currentIndexImage.value]['image'];
-
-      switch (typeWallpaper) {
-        case 0:
-          try {
-
-            result = await AsyncWallpaper.setWallpaper(
-              url: url,
-              wallpaperLocation: AsyncWallpaper.HOME_SCREEN,
-            )
-                ? 'Wallpaper set'
-                : 'Failed to get wallpaper.';
-          } on PlatformException {
-            result = 'Failed to get wallpaper.';
-          }
-
-          break;
-
-        case 1:
-          try {
-            result = await AsyncWallpaper.setWallpaper(
-              url: url,
-              wallpaperLocation: AsyncWallpaper.LOCK_SCREEN,
-            )
-                ? 'Wallpaper set'
-                : 'Failed to get wallpaper.';
-          } on PlatformException {
-            result = 'Failed to get wallpaper.';
-          }
-
-          break;
-
-        case 2:
-          try {
-            result = await AsyncWallpaper.setWallpaper(
-              url: url,
-              wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
-            )
-                ? 'Wallpaper set'
-                : 'Failed to get wallpaper.';
-          } on PlatformException {
-            result = 'Failed to get wallpaper.';
-          }
-
-          break;
-      }
-
-      showDownloading.value = false;
-      result = 'Set live wallpaper successfully';
-    } on PlatformException {
-      showDownloading.value = false;
-      result = 'Failed to get wallpaper';
-    }
-    showToast(result);
+  Future<bool> onWillPop(BuildContext context) async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Container(
+                  height: 200.0.sp,
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 40),
+                          child:
+                              DefaultTextStyle(style: TextStyle(color: Colors.black, fontSize: 24), child: Text("Exit App")),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: DefaultTextStyle(
+                              style: TextStyle(color: Colors.black, fontSize: 18),
+                              child: Text("Are you sure you want to exit the app?", textAlign: TextAlign.center)),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.0.sp),
+                          child: GestureDetector(
+                            onTap: () {
+                              exit(0);
+                            },
+                            child: Image.asset(
+                              AppImages.image_exit,
+                              width: 180,
+                              height: 40,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.0.sp),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Image.asset(
+                              AppImages.image_cancel,
+                              width: 180,
+                              height: 40,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        )) ??
+        false;
   }
 
   showToast(String text) {

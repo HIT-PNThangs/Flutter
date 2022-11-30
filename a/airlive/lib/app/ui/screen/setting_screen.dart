@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../util/extensions.dart';
 import 'package:store_redirect/store_redirect.dart';
 
+import '../../../util/extensions.dart';
 import '../../controller/home_controller.dart';
 import '../../res/font/app_fonts.dart';
 import '../../res/image/app_images.dart';
@@ -219,16 +219,19 @@ class SettingScreen extends GetView<HomeController> {
                     ),
                   ),
                   buildItemContainer(
-                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.watchface'),
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.numerology.thansohoc'),
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0.sp),
                       child: Row(
                         children: [
-                          Image.asset(
-                            AppImages.ic_watch_face,
-                            width: 60.0.sp,
-                            height: 60.0.sp,
-                            fit: BoxFit.contain,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_numerology,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
                           ),
                           SizedBox(width: 12.0.sp),
                           Expanded(
@@ -243,7 +246,7 @@ class SettingScreen extends GetView<HomeController> {
                                     fontFamily: AppFonts.robotoRegular,
                                   ),
                                   child: const Text(
-                                    'Watch Face\nWallpaper Gallery',
+                                    'Psychic numerology & life path',
                                   ),
                                 ),
                                 SizedBox(height: 4.0.sp),
@@ -254,10 +257,285 @@ class SettingScreen extends GetView<HomeController> {
                                     fontFamily: AppFonts.robotoRegular,
                                   ),
                                   child: const Text(
-                                    "Feel free to customize watch faces on your own apple watch with up to 2000+ "
-                                    "wallpapers from Watch Face Wallpaper Gallery app. Let's try it!!!",
+                                    "Explore all about: Numerology, Tarot cards, Zodiac, Dream meaning, Life path or Love",
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  buildItemContainer(
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.watchface'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0.sp),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_watchface,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(width: 12.0.sp),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 18.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                      'Watch Face Wallpaper Gallery',
+                                    )),
+                                SizedBox(height: 4.0.sp),
+                                DefaultTextStyle(
+                                  style: TextStyle(
+                                    color: AppColors.white.withOpacity(0.5),
+                                    fontSize: 12.0.sp,
+                                    fontFamily: AppFonts.robotoRegular,
+                                  ),
+                                  child: const Text(
+                                    "Feel free to customize watch faces on your own apple watch with up to 2000+ wallpapers from Watch Face Wallpaper Gallery app. Let's try it!!!",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  buildItemContainer(
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.thermometer'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0.sp),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_weather,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(width: 12.0.sp),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 18.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                      'Smart thermometer for room',
+                                    )),
+                                SizedBox(height: 4.0.sp),
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.5),
+                                      fontSize: 12.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                        "Temperature tracker- temperature detector helps you check temperature, check thermometer. Besides, check thermometer, show weather, humidity, or air quality are integrated like a thermostat app")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  buildItemContainer(
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.infinity.nfctools'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0.sp),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_nfc,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(width: 12.0.sp),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 18.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                      'Read nfc tagwriter - nfc writer',
+                                    )),
+                                SizedBox(height: 4.0.sp),
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.5),
+                                      fontSize: 12.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                        "NFC Tools- nfc tag reader are simple, intuitive, can record standard information on your NFC tags")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  buildItemContainer(
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.multiscanner'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0.sp),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_qrcode,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(width: 12.0.sp),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 18.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                      'QR Reader & MRZ, NFC Reader',
+                                    )),
+                                SizedBox(height: 4.0.sp),
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.5),
+                                      fontSize: 12.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                        "The simplest QR code generator- QR, NFC, MRZ, Barcode scanner app for Android!")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  buildItemContainer(
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.umeme'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0.sp),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_umeme,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(width: 12.0.sp),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 18.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                      'uMeme - Your Meme Maker',
+                                    )),
+                                SizedBox(height: 4.0.sp),
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.5),
+                                      fontSize: 12.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text("uMeme is the new way to share your mood into the world")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  buildItemContainer(
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.ballline'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0.sp),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_animal_cross,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(width: 12.0.sp),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 18.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                      'Animal Cross',
+                                    )),
+                                SizedBox(height: 4.0.sp),
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.5),
+                                      fontSize: 12.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text("Addictive puzzle game")),
                               ],
                             ),
                           ),
@@ -274,7 +552,7 @@ class SettingScreen extends GetView<HomeController> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12.0.sp),
                             child: Image.asset(
-                              AppImages.ic_gravity_ball,
+                              AppImages.ma_gravity,
                               width: 60.0.sp,
                               height: 60.0.sp,
                               fit: BoxFit.contain,
@@ -297,16 +575,59 @@ class SettingScreen extends GetView<HomeController> {
                                     )),
                                 SizedBox(height: 4.0.sp),
                                 DefaultTextStyle(
-                                  style: TextStyle(
-                                    color: AppColors.white.withOpacity(0.5),
-                                    fontSize: 12.0.sp,
-                                    fontFamily: AppFonts.robotoRegular,
-                                  ),
-                                  child: const Text(
-                                    "Help the gravity ball find its way to the black hole despite the gravity "
-                                    "and spikes?",
-                                  ),
-                                ),
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.5),
+                                      fontSize: 12.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                        "Help the gravity ball find its way to the black hole despite the gravity and spikes?")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  buildItemContainer(
+                    onPressed: () => StoreRedirect.redirect(androidAppId: 'com.vietapps.tilematch'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0.sp),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0.sp),
+                            child: Image.asset(
+                              AppImages.ma_tile,
+                              width: 60.0.sp,
+                              height: 60.0.sp,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(width: 12.0.sp),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 18.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                      'Connect Tile',
+                                    )),
+                                SizedBox(height: 4.0.sp),
+                                DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.5),
+                                      fontSize: 12.0.sp,
+                                      fontFamily: AppFonts.robotoRegular,
+                                    ),
+                                    child: const Text(
+                                        "Connect Tile - Geometry tile matching game is a brand new tile connect game with innovative gameplay.")),
                               ],
                             ),
                           ),
@@ -323,7 +644,7 @@ class SettingScreen extends GetView<HomeController> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12.0.sp),
                             child: Image.asset(
-                              AppImages.ic_healthy_fit,
+                              AppImages.ma_fitness,
                               width: 60.0.sp,
                               height: 60.0.sp,
                               fit: BoxFit.contain,
@@ -352,9 +673,8 @@ class SettingScreen extends GetView<HomeController> {
                                       fontFamily: AppFonts.robotoRegular,
                                     ),
                                     child: const Text(
-                                        "We created this application to target office workers, those who have little "
-                                        "time and also those who are passionate about gym. "
-                                        "Let's exercise with us!!!")),
+                                        "We created this application to target office workers, those who have little time and also "
+                                        "those who are passionate about gym.Let's exercise with us!!!")),
                               ],
                             ),
                           ),

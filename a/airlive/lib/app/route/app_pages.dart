@@ -18,10 +18,10 @@ class AppPages {
     GetPage(name: AppRoute.splash_screen, page: () => const SplashScreen(), binding: SplashBinding()),
     GetPage(name: AppRoute.home_screen, page: () => HomeScreen(), binding: HomeBinding()),
     GetPage(name: AppRoute.setting_screen, page: () => const SettingScreen(), transition: Transition.rightToLeft),
-    GetPage(name: AppRoute.category_screen, page: () => const CategoryScreen(), transition: Transition.downToUp),
+    GetPage(name: AppRoute.category_screen, page: () => CategoryScreen(), transition: Transition.downToUp),
     GetPage(
         name: AppRoute.subscriber_screen,
-        page: () => const SubscribeScreen(),
+        page: () => SubscribeScreen(),
         binding: SubscribeBinding(),
         transition: Transition.downToUp),
     GetPage(
@@ -31,7 +31,7 @@ class AppPages {
         transition: Transition.downToUp),
     GetPage(
         name: AppRoute.preview_screen,
-        page: () => const PreviewScreen(),
+        page: () => PreviewScreen(),
         binding: PreviewBinding(),
         transition: Transition.downToUp)
   ];

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../util/extensions.dart';
 
@@ -14,5 +15,9 @@ class AppUtil {
       textColor: AppColors.black,
       fontSize: 16.0.sp,
     );
+  }
+  static void log(String text) {
+    final pattern = RegExp('.{1,800}');
+    pattern.allMatches(text).forEach((match) => debugPrint(match.group(0)));
   }
 }

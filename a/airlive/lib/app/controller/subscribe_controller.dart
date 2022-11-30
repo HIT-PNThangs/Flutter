@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:get/get.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../util/app_util.dart';
+import '../ui/theme/app_colors.dart';
 import 'app_controller.dart';
 
 class SubscribeController extends GetxController {
@@ -18,50 +20,8 @@ class SubscribeController extends GetxController {
 
   @override
   void onInit() {
-    asyncInitState();
     showCloseButton();
     super.onInit();
-  }
-
-  void asyncInitState() async {
-    await FlutterInappPurchase.instance.initialize();
-
-    // lỗi gì đó nếu để 1 wf_yearly thì chỉ lấy lấy về wf_yearly chứ ko lấy được wf_weekly wf_monthly
-    List<IAPItem> list =
-        await FlutterInappPurchase.instance.getSubscriptions(['wf_weekly', 'wf_yearly', 'wf_monthly', 'wf_yearly']);
-
-    list.sort((a, b) => (double.tryParse(a.price ?? '0.0') ?? 0.0).compareTo((double.tryParse(b.price ?? '0.0') ?? 0.0)));
-
-    if (list.length > 3) {
-      rxListIAPItem.value = [list[0], list[1], list[2]];
-    } else {
-      rxListIAPItem.value = list;
-    }
-
-    _purchaseUpdatedSubscription = FlutterInappPurchase.purchaseUpdated.listen((productItem) {
-      String name = (productItem?.productId ?? '');
-
-      switch (productItem?.productId) {
-        case 'wf_weekly':
-          name = 'Weekly';
-          break;
-
-        case 'wf_monthly':
-          name = 'Monthly';
-          break;
-
-        case 'wf_yearly':
-          name = 'Yearly';
-          break;
-      }
-
-      AppUtil.showToast('Congratulations! you have successfully purchased the $name premium package');
-      _appController.isPremium.value = true;
-    });
-
-    _purchaseErrorSubscription = FlutterInappPurchase.purchaseError.listen((purchaseError) {
-      AppUtil.showToast('An error occurred, please try again later');
-    });
   }
 
   @override
@@ -69,8 +29,10 @@ class SubscribeController extends GetxController {
     super.onClose();
     _purchaseUpdatedSubscription?.cancel();
     _purchaseUpdatedSubscription = null;
+
     _purchaseErrorSubscription?.cancel();
     _purchaseErrorSubscription = null;
+
     await FlutterInappPurchase.instance.finalize();
   }
 

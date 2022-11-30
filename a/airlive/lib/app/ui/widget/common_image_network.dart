@@ -37,7 +37,6 @@ class CommonImageNetwork extends StatelessWidget {
           image: DecorationImage(
             image: AssetImage(AppImages.ic_placeholder),
             fit: BoxFit.scaleDown,
-            opacity: 0.6
           ),
         ),
         child: Center(

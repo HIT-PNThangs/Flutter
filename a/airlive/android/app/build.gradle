@@ -29,7 +29,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
+def keystorePropertiesFile = rootProject.file('app/key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
@@ -82,6 +82,7 @@ dependencies {
     implementation "androidx.multidex:multidex:2.0.1"
 //    implementation 'com.github.iamutkarshtiwari:Ananas:1.2.6'
     implementation 'com.google.android.gms:play-services-wearable:18.0.0'
+    implementation 'com.google.android.gms:play-services-ads:21.3.0'
 }
 
 flutter {

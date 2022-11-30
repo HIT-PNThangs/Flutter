@@ -1,3 +1,4 @@
+import 'package:airlive/app/ui/loading/easy_loading.dart';
 import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -107,7 +108,7 @@ class SelectedImageController extends GetxController {
       result = 'Failed to get wallpaper';
     }
 
-    showToast(result);
+    EasyLoading.showToast(result);
   }
 
   showToast(String text) {
