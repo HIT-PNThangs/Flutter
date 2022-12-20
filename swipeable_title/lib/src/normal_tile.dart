@@ -87,8 +87,6 @@ class NormalTile extends StatelessWidget {
               },
             ),
           ),
-
-          // content,
         ],
       ),
     );

@@ -1,1 +1,0 @@
-<img src="images/Screenshot_20221127_141801.png" alt="Image screen" width="200"/>

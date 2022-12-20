@@ -54,8 +54,6 @@ class CardTile extends StatelessWidget {
               child: child,
             ),
           ),
-
-          // content,
         ],
       ),
     );
