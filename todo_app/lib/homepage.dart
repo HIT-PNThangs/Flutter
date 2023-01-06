@@ -42,7 +42,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // start loading until the data arrives
     if (GoogleSheetsApi.loading == true) {
       startLoading();
     }
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'things to do..',
+          'Things to do..',
           style: TextStyle(color: Colors.grey[600]),
         ),
         backgroundColor: Colors.transparent,
@@ -73,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                 child: TextField(
                   controller: _controller,
                   decoration: InputDecoration(
-                      hintText: 'enter..',
+                      hintText: 'Enter..',
                       border: const OutlineInputBorder(),
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.clear),
@@ -88,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Padding(
                     padding: EdgeInsets.all(15.0),
-                    child: Text('@ c r e a t e d b y k o k o'),
+                    child: Text('@ P N T'),
                   ),
                   MyButton(
                     text: 'P O S T',

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyTextBox extends StatelessWidget {
   final String text;
 
-  const MyTextBox({required this.text});
+  const MyTextBox({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

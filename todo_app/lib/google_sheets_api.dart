@@ -27,9 +27,7 @@ class GoogleSheetsApi {
 
   // count the number of notes
   static Future countRows() async {
-    while (
-        (await _worksheet!.values.value(column: 1, row: numberOfNotes + 1)) !=
-            '') {
+    while ((await _worksheet!.values.value(column: 1, row: numberOfNotes + 1)) != '') {
       numberOfNotes++;
     }
     // now we know how many notes to load, now let's load them!
@@ -41,13 +39,9 @@ class GoogleSheetsApi {
     if (_worksheet == null) return;
 
     for (int i = 0; i < numberOfNotes; i++) {
-      final String newNote =
-          await _worksheet!.values.value(column: 1, row: i + 1);
+      final String newNote = await _worksheet!.values.value(column: 1, row: i + 1);
       if (currentNotes.length < numberOfNotes) {
-        currentNotes.add([
-          newNote,
-          int.parse(await _worksheet!.values.value(column: 2, row: i + 1))
-        ]);
+        currentNotes.add([newNote, int.parse(await _worksheet!.values.value(column: 2, row: i + 1))]);
       }
     }
 
